@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "dyrynda/laravel-model-uuid": "^6.6",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
