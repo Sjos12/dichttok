@@ -10,6 +10,13 @@ class Gedicht extends Model
 {
     use HasFactory, GeneratesUuid;
 
+    protected $table = 'gedichten';
+    protected $fillable = [
+        'titel',
+        'gedicht',
+        'auteur',
+        'context',
+    ];
     public function likes()
     {
         return $this->hasMany(Like::class);

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id');
-            $table->string('title', 100);
+            $table->string('titel', 100);
             $table->string('gedicht', 500);
-            $table->string('author', 100);
+            $table->string('auteur', 100);
             $table->string('context', 500);
             $table->timestamps();
         });

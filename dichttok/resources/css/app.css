@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-   
+   body {
+    @apply tracking-normal;
+   }
 }
 
 @layer components {

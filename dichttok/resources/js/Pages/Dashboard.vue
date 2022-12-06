@@ -3,6 +3,10 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import PrimaryButtonVue from "@/Components/PrimaryButton.vue";
 import { Inertia } from "@inertiajs/inertia";
+import GedichtVue from "./Gedicht.vue";
+const props = defineProps({
+    gedichten: Object,
+});
 function gedichtMaken() {
     let url = route("gedicht.create.index");
     Inertia.visit(url);
@@ -36,7 +40,12 @@ function gedichtMaken() {
             </template>
 
             <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <GedichtVue
+                    v-for="gedicht in props.gedichten"
+                    v-bind:key="gedicht.id"
+                    :gedicht="gedicht"
+                ></GedichtVue>
+                <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div
                         class="
                             bg-white
@@ -50,7 +59,7 @@ function gedichtMaken() {
                             You're logged in!
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </AuthenticatedLayout>
     </div>

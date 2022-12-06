@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gedicht;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 
@@ -26,7 +27,10 @@ class GedichtController extends Controller
             'context' => '',
         ]);
 
-        $model = new Gedicht();
+        $model = new Gedicht($validatedData);
+        $model->user_id = Auth::user()->id;
+        $model->save();
+        
         return redirect()->route('dashboard');
     }
 }
