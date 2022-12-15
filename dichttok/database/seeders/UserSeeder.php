@@ -17,12 +17,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
+        $name = 'Denzel Stellingwerf';
+        if (User::where('name', $name)->get()->isNotEmpty()) return;
 
         $user = new User();
-        $user->name = 'Denzel Stellingwerf';
+        $user->name = $name;
         $user->email = 'denzelstellingwerf@outlook.com';
         $user->password = Hash::make('Sowhat12');
         $user->save();
-        
     }
 }

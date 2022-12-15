@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gedicht;
+use App\Models\Like;
+use App\Models\Stijlmiddel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
@@ -30,7 +32,32 @@ class GedichtController extends Controller
         $model = new Gedicht($validatedData);
         $model->user_id = Auth::user()->id;
         $model->save();
-        
+
         return redirect()->route('dashboard');
+    }
+
+    public function like(Gedicht $gedicht)
+    {
+        // TODO: Check if gedicht should be available to user...
+        $oldLike = $gedicht->likes()
+            ->where('user_id', Auth::user()->id);
+
+        if ($oldLike->exists()) {
+            $oldLike->delete();
+        } else {
+            $like = new Like();
+            $like->user_id = Auth::user()->id;
+            $like->gedicht_id = $gedicht->id;
+            $like->save();
+        }
+        return redirect()->back();
+    }
+
+    public function analyze_index(Gedicht $gedicht)
+    {
+        return Inertia::render('GedichtAnalyze', [
+            'gedicht' => $gedicht,
+            'stijlmiddelen' => Stijlmiddel::all(),
+        ]);
     }
 }

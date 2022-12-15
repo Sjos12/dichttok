@@ -1,5 +1,6 @@
 <script setup>
 import InputLabelVue from "@/Components/InputLabel.vue";
+import { Inertia } from "@inertiajs/inertia";
 import { computed } from "@vue/runtime-core";
 import { DateTime } from "luxon";
 const props = defineProps({
@@ -9,6 +10,23 @@ const props = defineProps({
 let createdAt = computed(() => {
     return DateTime.fromISO(props.gedicht.created_at).toRelative();
 });
+
+function sendLike() {
+    let url = route("gedicht.like", props.gedicht.uuid);
+    Inertia.post(
+        url,
+        {},
+        {
+            preserveState: false,
+            preserveScroll: true,
+        }
+    );
+}
+
+function analyzeGedicht() {
+    let url = route("gedicht.analyze.index", props.gedicht.uuid);
+    Inertia.get(url);
+}
 </script>
 <template>
     <div class="card mx-auto h-screen max-w-xl py-10 flex flex-col gap-y-5">
@@ -33,13 +51,16 @@ let createdAt = computed(() => {
                 </span>
             </div>
             <div class="mt-auto text-white flex flex-col gap-y-10 my-10">
-                <button>
+                <button @click="sendLike">
                     <i class="fa fa-heart fa-2xl"></i>
                     {{ props.gedicht.likes.length }}
                 </button>
 
                 <button>
                     <i class="fa fa-comments fa-xl"></i>
+                </button>
+                <button @click="analyzeGedicht">
+                    <i class="fa fa-magnifying-glass-chart fa-xl"></i>
                 </button>
             </div>
         </div>

@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/gedicht/create', [GedichtController::class, 'create'])->name('gedicht.create');
     Route::get('/gedicht/create', [GedichtController::class, 'create_index'])->name('gedicht.create.index');
+
+    Route::post('/gedicht/{gedicht:uuid}/like', [GedichtController::class, 'like'])->name('gedicht.like');
+
+    Route::get('/gedicht/{gedicht:uuid}/analyze', [GedichtController::class, 'analyze_index'])->name('gedicht.analyze.index');
 });
 
 require __DIR__ . '/auth.php';
