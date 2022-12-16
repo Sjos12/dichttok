@@ -6,20 +6,15 @@ import { isReactive, reactive, ref } from "@vue/reactivity";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Stijlmiddel from "@/Components/Stijlmiddel.vue";
 import GedichtFragment from "@/Components/GedichtFragment.vue";
-
+import { computed } from "@vue/runtime-core";
+// import Header from '@/Components/'
 const props = defineProps({
     auth: Object,
     gedicht: Object,
     stijlmiddelen: Object,
 });
 
-const activeHighlightObject = reactive({
-    start: 0,
-    end: 0,
-    value: "",
-    stijlmiddel: {},
-    type: "",
-});
+const activeHighlightObject = reactive({});
 
 const highlightFragments = reactive([]);
 
@@ -34,12 +29,14 @@ const gedichtFragments = reactive([
 
 const gedichtref = ref(props.gedicht.gedicht);
 
+const stijlmiddelPickerPosition = reactive({ x: null, y: null });
 function getSelectedText(fragment) {
     // Reset
     Object.assign(activeHighlightObject, {
         start: 0,
         end: 0,
         type: "highlight",
+        stijlmiddel: props.stijlmiddelen[0],
     });
 
     let selection = {};
@@ -58,6 +55,12 @@ function getSelectedText(fragment) {
         activeHighlightObject.start = fragment.start + selection.focusOffset;
         activeHighlightObject.end = fragment.start + selection.anchorOffset;
     }
+    let oRange = selection.getRangeAt(0); //get the text range
+    let oRect = oRange.getBoundingClientRect();
+
+    stijlmiddelPickerPosition.x = oRect.x;
+    stijlmiddelPickerPosition.y = oRect.y;
+
     highlightFragments.splice(0);
     highlightFragments.push(activeHighlightObject);
     splitUpGedicht();
@@ -108,6 +111,10 @@ function splitUpGedicht() {
     console.log(gedichtFragments);
 }
 
+const isActive = (stijlmiddel) => {
+    return stijlmiddel == activeHighlightObject.stijlmiddel;
+};
+
 function sortFragments() {
     gedichtFragments.sort((a, b) => {
         return a.start - b.start;
@@ -116,17 +123,56 @@ function sortFragments() {
 </script>
 <template>
     <AuthenticatedLayoutVue>
+        {{ activeHighlightObject }}
+
+        <div
+            v-if="activeHighlightObject.start"
+            class="
+                card
+                flex
+                gap-3
+                absolute
+                shadow-lg
+                overflow-x-auto
+                bg-gray-800
+                p-2
+            "
+            :style="{
+                top: stijlmiddelPickerPosition.y - 80 + 'px',
+                left: stijlmiddelPickerPosition.x + 'px',
+            }"
+        >
+            <button
+                v-for="stijlmiddel of stijlmiddelen"
+                :key="stijlmiddel.id"
+                :style="{ backgroundColor: stijlmiddel.color }"
+                class="text-white shadow-md rounded-md p-2 duration-100"
+                :class="
+                    isActive(stijlmiddel)
+                        ? 'border-b-2 border-b-white font-medium'
+                        : ''
+                "
+                @click="activeHighlightObject.stijlmiddel = stijlmiddel"
+            >
+                {{ stijlmiddel.name }}
+            </button>
+        </div>
         <div class="card mx-auto">
             <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
-                <template v-for="fragment of gedichtFragments">
+                <template v-for="(fragment, idx) of gedichtFragments">
                     <Stijlmiddel
                         @mouseup="getSelectedText(fragment)"
                         v-if="fragment.type == 'highlight'"
                         :content="
                             gedichtref.slice(fragment.start, fragment.end)
                         "
+                        :ref="
+                            (el) => {
+                                fragment.element = el;
+                            }
+                        "
                         :stijlmiddel="fragment.stijlmiddel"
-                        :key="fragment.start"
+                        :key="idx"
                     />
                     <GedichtFragment
                         v-else
@@ -134,23 +180,17 @@ function sortFragments() {
                         :content="
                             gedichtref.slice(fragment.start, fragment.end)
                         "
-                        :key="fragment.start"
+                        :key="idx * 2"
                     />
                 </template>
             </p>
-            <p class="text-white">
+            <!-- <p class="text-white">
                 {{ props.gedicht.gedicht }}
-            </p>
+            </p> -->
 
-            <div class="flex"></div>
-            <button
-                v-for="stijlmiddel of stijlmiddelen"
-                :key="stijlmiddel.id"
-                :class="stijlmiddel.color"
-                @click="activeHighlightObject.stijlmiddel = stijlmiddel"
-            >
-                {{ stijlmiddel.name }}
-            </button>
+            <div class="flex">
+                <PrimaryButton class="ml-auto">Opslaan</PrimaryButton>
+            </div>
         </div>
     </AuthenticatedLayoutVue>
 </template>
