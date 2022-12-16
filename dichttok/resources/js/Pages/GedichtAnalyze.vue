@@ -39,7 +39,6 @@ function getSelectedText(fragment) {
     Object.assign(activeHighlightObject, {
         start: 0,
         end: 0,
-        value: "",
         type: "highlight",
     });
 
@@ -87,7 +86,7 @@ function splitUpGedicht() {
     gedichtFragments.splice(0, 0, {
         start: 0,
         end: highlightFragments[0].start,
-        value: startOfGedicht,
+        // value: startOfGedicht,
         type: "unedited",
     });
 
@@ -103,7 +102,7 @@ function splitUpGedicht() {
     gedichtFragments.splice(gedichtFragments.length - 1, 0, {
         start: lastIndice.end,
         end: gedichtref.value.length,
-        value: endOfGedicht,
+        // value: endOfGedicht,
         type: "unedited",
     });
     console.log(gedichtFragments);
@@ -123,14 +122,18 @@ function sortFragments() {
                     <Stijlmiddel
                         @mouseup="getSelectedText(fragment)"
                         v-if="fragment.type == 'highlight'"
-                        :content="fragment.value"
+                        :content="
+                            gedichtref.slice(fragment.start, fragment.end)
+                        "
                         :stijlmiddel="fragment.stijlmiddel"
                         :key="fragment.start"
                     />
                     <GedichtFragment
                         v-else
                         @mouseup="getSelectedText(fragment)"
-                        :content="fragment.value"
+                        :content="
+                            gedichtref.slice(fragment.start, fragment.end)
+                        "
                         :key="fragment.start"
                     />
                 </template>
