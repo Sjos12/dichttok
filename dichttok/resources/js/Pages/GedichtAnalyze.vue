@@ -24,12 +24,17 @@ const activeHighlightObject = reactive({
 const highlightFragments = reactive([]);
 
 const gedichtFragments = reactive([
-    { type: "unedited", value: props.gedicht.gedicht },
+    {
+        type: "unedited",
+        start: 0,
+        end: props.gedicht.gedicht.length,
+        value: props.gedicht.gedicht,
+    },
 ]);
 
 const gedichtref = ref(props.gedicht.gedicht);
 
-function getSelectedText() {
+function getSelectedText(fragment) {
     // Reset
     Object.assign(activeHighlightObject, {
         start: 0,
@@ -47,14 +52,12 @@ function getSelectedText() {
         activeHighlightObject.value = selection.createRange().text;
     } else return; // To write the selected text into the textarea
 
-    console.log("selection", selection);
-
     if (selection.anchorOffset < selection.focusOffset) {
-        activeHighlightObject.start = selection.anchorOffset;
-        activeHighlightObject.end = selection.focusOffset;
+        activeHighlightObject.start = fragment.start + selection.anchorOffset;
+        activeHighlightObject.end = fragment.start + selection.focusOffset;
     } else {
-        activeHighlightObject.start = selection.focusOffset;
-        activeHighlightObject.end = selection.anchorOffset;
+        activeHighlightObject.start = fragment.start + selection.focusOffset;
+        activeHighlightObject.end = fragment.start + selection.anchorOffset;
     }
     highlightFragments.splice(0);
     highlightFragments.push(activeHighlightObject);
@@ -114,16 +117,26 @@ function sortFragments() {
 </script>
 <template>
     <AuthenticatedLayoutVue>
-        <div @mouseup="getSelectedText" class="card mx-auto">
+        <div class="card mx-auto">
             <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
-                <span v-for="fragment of gedichtFragments" :key="fragment.key">
+                <template v-for="fragment of gedichtFragments">
                     <Stijlmiddel
+                        @mouseup="getSelectedText(fragment)"
                         v-if="fragment.type == 'highlight'"
                         :content="fragment.value"
                         :stijlmiddel="fragment.stijlmiddel"
+                        :key="fragment.start"
                     />
-                    <GedichtFragment v-else :content="fragment.value" />
-                </span>
+                    <GedichtFragment
+                        v-else
+                        @mouseup="getSelectedText(fragment)"
+                        :content="fragment.value"
+                        :key="fragment.start"
+                    />
+                </template>
+            </p>
+            <p class="text-white">
+                {{ props.gedicht.gedicht }}
             </p>
 
             <div class="flex"></div>
