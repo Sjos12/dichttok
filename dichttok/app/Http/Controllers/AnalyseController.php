@@ -14,7 +14,7 @@ class AnalyseController extends Controller
 {
     public function index(Gedicht $gedicht)
     {
-        return Inertia::render('GedichtAnalyze', [
+        return Inertia::render('CreateGedichtAnalyse', [
             'gedicht' => $gedicht,
             'stijlmiddelen' => Stijlmiddel::all(),
         ]);
@@ -40,6 +40,15 @@ class AnalyseController extends Controller
             $fragment_model->save();
         }
         return redirect()->route('dashboard');
+    }
+
+    public function detail(Request $request, Gedicht $gedicht, Analysis $analysis)
+    {
+        $analysis->load('highlight_fragments.stijlmiddel');
+        return Inertia::render('ViewGedichtAnalyse', [
+            'gedicht' => $gedicht,
+            'analysis' => $analysis,
+        ]);
     }
     //
 }

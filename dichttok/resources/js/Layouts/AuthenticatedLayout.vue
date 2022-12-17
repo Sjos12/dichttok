@@ -15,6 +15,7 @@ const showingNavigationDropdown = ref(false);
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav
                 class="
+                    z-50
                     sticky
                     top-0
                     w-full

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('analyses', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignId('user_id');
             $table->foreignId('gedicht_id');
             $table->timestamps();

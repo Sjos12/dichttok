@@ -107,15 +107,15 @@ function splitUpGedicht() {
     });
 }
 
-const isActive = (stijlmiddel) => {
-    return stijlmiddel == activeHighlightObject.stijlmiddel;
-};
-
 function sortFragments() {
     gedichtFragments.sort((a, b) => {
         return a.start - b.start;
     });
 }
+const isActive = (stijlmiddel) => {
+    return stijlmiddel == activeHighlightObject.stijlmiddel;
+};
+
 function submit() {
     let url = route("gedicht.analyze.create", props.gedicht.uuid);
     Inertia.post(url, {
@@ -125,8 +125,6 @@ function submit() {
 </script>
 <template>
     <AuthenticatedLayoutVue>
-        {{ activeHighlightObject }}
-
         <div
             v-if="activeHighlightObject.start"
             class="
