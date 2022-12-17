@@ -7,6 +7,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Stijlmiddel from "@/Components/Stijlmiddel.vue";
 import GedichtFragment from "@/Components/GedichtFragment.vue";
 import { computed } from "@vue/runtime-core";
+import { Inertia } from "@inertiajs/inertia";
 // import Header from '@/Components/'
 const props = defineProps({
     auth: Object,
@@ -42,10 +43,10 @@ function getSelectedText(fragment) {
     let selection = {};
     if (window.getSelection || document.getSelection) {
         selection = window.getSelection();
-        activeHighlightObject.value = selection.toString();
+        // activeHighlightObject.value = selection.toString();
     } else if (document.selection) {
         selection = document.selection;
-        activeHighlightObject.value = selection.createRange().text;
+        // activeHighlightObject.value = selection.createRange().text;
     } else return; // To write the selected text into the textarea
 
     if (selection.anchorOffset < selection.focusOffset) {
@@ -78,12 +79,6 @@ function splitUpGedicht() {
     // Indiced must be sorted... [{start: x, end: y}, {start: a, end: a}]
 
     // uneditedIndices = [];
-    let startOfGedicht = gedichtref.value.slice(0, highlightFragments[0].start);
-    let lastIndice = highlightFragments[highlightFragments.length - 1];
-    let endOfGedicht = gedichtref.value.slice(
-        lastIndice.end,
-        gedichtref.length
-    );
 
     // unedited fragment
     gedichtFragments.splice(0, 0, {
@@ -102,13 +97,14 @@ function splitUpGedicht() {
             end: nextIndice.start,
         });
     }
+
+    let lastIndice = highlightFragments[highlightFragments.length - 1];
     gedichtFragments.splice(gedichtFragments.length - 1, 0, {
         start: lastIndice.end,
         end: gedichtref.value.length,
         // value: endOfGedicht,
         type: "unedited",
     });
-    console.log(gedichtFragments);
 }
 
 const isActive = (stijlmiddel) => {
@@ -118,6 +114,12 @@ const isActive = (stijlmiddel) => {
 function sortFragments() {
     gedichtFragments.sort((a, b) => {
         return a.start - b.start;
+    });
+}
+function submit() {
+    let url = route("gedicht.analyze.create", props.gedicht.uuid);
+    Inertia.post(url, {
+        highlightFragments,
     });
 }
 </script>
@@ -189,7 +191,9 @@ function sortFragments() {
             </p> -->
 
             <div class="flex">
-                <PrimaryButton class="ml-auto">Opslaan</PrimaryButton>
+                <PrimaryButton @click="submit" class="ml-auto"
+                    >Opslaan</PrimaryButton
+                >
             </div>
         </div>
     </AuthenticatedLayoutVue>

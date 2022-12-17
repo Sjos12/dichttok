@@ -10,4 +10,9 @@ class Stijlmiddel extends Model
     use HasFactory;
 
     protected $table = 'stijlmiddelen';
+
+    public function highlight_fragments()
+    {
+        return $this->hasManyThrough(HighlightFragment::class, Analysis::class);
+    }
 }

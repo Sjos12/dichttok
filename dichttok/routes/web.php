@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnalyseController;
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GedichtController;
 use App\Http\Controllers\ProfileController;
@@ -39,7 +41,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/gedicht/{gedicht:uuid}/like', [GedichtController::class, 'like'])->name('gedicht.like');
 
-    Route::get('/gedicht/{gedicht:uuid}/analyze', [GedichtController::class, 'analyze_index'])->name('gedicht.analyze.index');
+    Route::get('/gedicht/{gedicht:uuid}/analyze', [AnalyseController::class, 'index'])->name('gedicht.analyze.index');
+
+    Route::post('/gedicht/{gedicht:uuid}/analyze', [AnalyseController::class, 'create'])->name('gedicht.analyze.create');
 });
 
 require __DIR__ . '/auth.php';

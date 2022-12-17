@@ -52,12 +52,4 @@ class GedichtController extends Controller
         }
         return redirect()->back();
     }
-
-    public function analyze_index(Gedicht $gedicht)
-    {
-        return Inertia::render('GedichtAnalyze', [
-            'gedicht' => $gedicht,
-            'stijlmiddelen' => Stijlmiddel::all(),
-        ]);
-    }
 }
