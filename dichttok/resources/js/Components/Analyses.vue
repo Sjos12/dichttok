@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 const props = defineProps({
     gedicht: Object,
 });
-const emits = defineEmits(["toggleModal"]);
+const emits = defineEmits(["toggleModal", "chooseAnalyse"]);
 </script>
 <template>
     <div class="grid">
@@ -19,20 +19,15 @@ const emits = defineEmits(["toggleModal"]);
         </div>
 
         <template v-if="props.gedicht.analyses.length > 0">
-            <Link
-                :href="
-                    $route('gedicht.analyze.detail', {
-                        analysis: analyse.uuid,
-                        gedicht: props.gedicht.uuid,
-                    })
-                "
+            <button
                 v-for="analyse of props.gedicht.analyses"
                 :key="analyse.id"
+                @click="$emit('chooseAnalyse', analyse)"
                 class="card flex justify-between w-full bg-gray-700"
             >
                 {{ analyse.user.name }}
                 <i class="fa fa-heart fa-md my-auto"></i>
-            </Link>
+            </button>
         </template>
         <span class="m-auto" v-else> No analyses yet </span>
     </div>

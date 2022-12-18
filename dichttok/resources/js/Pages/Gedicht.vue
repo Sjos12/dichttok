@@ -2,15 +2,18 @@
 import InputLabelVue from "@/Components/InputLabel.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
-import { computed, ref } from "@vue/runtime-core";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { DateTime } from "luxon";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Comments from "@/Components/Comments.vue";
 import Analyses from "@/Components/Analyses.vue";
+import ViewGedichtAnalyse from "./ViewGedichtAnalyse.vue";
 const props = defineProps({
     gedicht: Object,
 });
 
+const activeAnalyse = reactive({});
+const analyseIsOpen = ref(false);
 let createdAt = computed(() => {
     return DateTime.fromISO(props.gedicht.created_at).toRelative();
 });
@@ -48,6 +51,11 @@ function openAnalyses() {
     modalState.value = "analyses";
     toggleModal();
 }
+function chooseAnalyse(analyse) {
+    analyseIsOpen.value = true;
+    Object.assign(activeAnalyse, analyse);
+    toggleModal();
+}
 </script>
 <template>
     <div
@@ -68,6 +76,7 @@ function openAnalyses() {
                         {{ props.gedicht.titel }}
                     </h1>
                     <p
+                        v-if="!analyseIsOpen"
                         class="
                             text-gray-100
                             mt-5
@@ -77,6 +86,12 @@ function openAnalyses() {
                         "
                     >
                         {{ props.gedicht.gedicht }}
+                    </p>
+                    <p v-if="analyseIsOpen && activeAnalyse">
+                        <ViewGedichtAnalyse
+                            :gedicht="props.gedicht"
+                            :analysis="activeAnalyse"
+                        />
                     </p>
                     <span class="mt-10 text-gray-300">
                         {{ "- " + props.gedicht.auteur }}
@@ -126,6 +141,7 @@ function openAnalyses() {
                 <Analyses
                     v-if="modalState == 'analyses'"
                     @toggle-modal="toggleModal()"
+                    @choose-analyse="chooseAnalyse"
                     :gedicht="props.gedicht"
                 />
                 <template v-else>

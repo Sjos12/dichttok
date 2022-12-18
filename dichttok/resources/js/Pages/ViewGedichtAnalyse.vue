@@ -8,6 +8,7 @@ const props = defineProps({
     gedicht: Object,
     analysis: Object,
 });
+console.log(props.analysis);
 const gedichtFragments = reactive([]);
 const gedichtref = ref(props.gedicht.gedicht);
 const highlightFragments = reactive(props.analysis.highlight_fragments);
@@ -61,53 +62,26 @@ function sortFragments() {
 }
 </script>
 <template>
-    <AuthenticatedLayoutVue>
-        <template class="flex" #header>
-            <div class="flex justify-between items-center">
-                <h2
-                    class="
-                        font-semibold
-                        text-xl text-gray-800
-                        dark:text-gray-200
-                        leading-tight
-                    "
-                >
-                    Analyse bekijken
-                </h2>
-            </div>
+    <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
+        <template v-for="(fragment, idx) of gedichtFragments">
+            <Stijlmiddel
+                @mouseup="getSelectedText(fragment)"
+                v-if="fragment.type == 'highlight'"
+                :content="gedichtref.slice(fragment.start, fragment.end)"
+                :ref="
+                    (el) => {
+                        fragment.element = el;
+                    }
+                "
+                :stijlmiddel="fragment.stijlmiddel"
+                :key="idx"
+            />
+            <GedichtFragment
+                v-else
+                @mouseup="getSelectedText(fragment)"
+                :content="gedichtref.slice(fragment.start, fragment.end)"
+                :key="idx + 1"
+            />
         </template>
-        <div class="card mx-auto">
-            <div class="flex">
-                <InputLabelVue>
-                    {{ props.analysis.user.name }}
-                </InputLabelVue>
-            </div>
-            <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
-                <template v-for="(fragment, idx) of gedichtFragments">
-                    <Stijlmiddel
-                        @mouseup="getSelectedText(fragment)"
-                        v-if="fragment.type == 'highlight'"
-                        :content="
-                            gedichtref.slice(fragment.start, fragment.end)
-                        "
-                        :ref="
-                            (el) => {
-                                fragment.element = el;
-                            }
-                        "
-                        :stijlmiddel="fragment.stijlmiddel"
-                        :key="idx"
-                    />
-                    <GedichtFragment
-                        v-else
-                        @mouseup="getSelectedText(fragment)"
-                        :content="
-                            gedichtref.slice(fragment.start, fragment.end)
-                        "
-                        :key="idx + 1"
-                    />
-                </template>
-            </p>
-        </div>
-    </AuthenticatedLayoutVue>
+    </p>
 </template>
