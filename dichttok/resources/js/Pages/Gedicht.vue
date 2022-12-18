@@ -1,8 +1,12 @@
 <script setup>
 import InputLabelVue from "@/Components/InputLabel.vue";
 import { Inertia } from "@inertiajs/inertia";
+import { Link } from "@inertiajs/inertia-vue3";
 import { computed, ref } from "@vue/runtime-core";
 import { DateTime } from "luxon";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Comments from "@/Components/Comments.vue";
+import Analyses from "@/Components/Analyses.vue";
 const props = defineProps({
     gedicht: Object,
 });
@@ -24,6 +28,10 @@ function sendLike() {
 }
 
 let modalOpen = ref(false);
+let modalState = ref("comments");
+const likedGedicht = computed(() => {
+    return props.gedicht.is_liked;
+});
 function analyzeGedicht() {
     let url = route("gedicht.analyze.index", props.gedicht.uuid);
     Inertia.get(url);
@@ -32,17 +40,19 @@ function toggleModal() {
     console.log(modalOpen);
     modalOpen.value = !modalOpen.value;
 }
-function openAnalyse(analyse) {
-    let url = route("gedicht.analyze.detail", {
-        analysis: analyse.uuid,
-        gedicht: props.gedicht.uuid,
-    });
-    console.log(url);
-    Inertia.get(url);
+function openComments() {
+    modalState.value = "comments";
+    toggleModal();
+}
+function openAnalyses() {
+    modalState.value = "analyses";
+    toggleModal();
 }
 </script>
 <template>
-    <div class="relative overflow-y-hidden mx-auto h-screen max-w-xl py-10">
+    <div
+        class="relative overflow-y-hidden mx-auto h-full max-h-screen max-w-xl"
+    >
         <div class="card h-full flex flex-col gap-y-5">
             <div class="flex w-full justify-between items-center">
                 <InputLabelVue>
@@ -52,7 +62,7 @@ function openAnalyse(analyse) {
                     {{ createdAt }}
                 </InputLabelVue>
             </div>
-            <div class="flex h-full">
+            <div class="flex h-full gap-3">
                 <div class="flex flex-col gap-y-5">
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
@@ -72,20 +82,28 @@ function openAnalyse(analyse) {
                         {{ "- " + props.gedicht.auteur }}
                     </span>
                 </div>
-                <div class="mt-auto text-white flex flex-col gap-y-10 my-10">
-                    <button @click="sendLike">
-                        <i class="fa fa-heart fa-2xl"></i>
-                        {{ props.gedicht.likes.length }}
+                <div
+                    class="pt-20 mt-auto text-white flex flex-col gap-y-6 my-10"
+                >
+                    <button class="flex flex-col gap-y-5" @click="sendLike">
+                        <i
+                            :class="likedGedicht ? 'text-red-500' : ''"
+                            class="fa fa-heart fa-2xl"
+                        ></i>
+                        <span>
+                            {{ props.gedicht.likes.length }}
+                        </span>
                     </button>
 
-                    <button>
+                    <button class="flex flex-col gap-y-5" @click="openComments">
                         <i class="fa fa-comments fa-xl"></i>
+                        <!-- <span>{{ 1 }}</span> -->
                     </button>
-                    <button @click="analyzeGedicht">
+
+                    <button class="flex flex-col gap-y-5" @click="openAnalyses">
                         <i class="fa fa-magnifying-glass-chart fa-xl"></i>
-                    </button>
-                    <button @click="toggleModal">
-                        <i class="fa fa-list fa-xl"></i>
+
+                        <!-- <span>{{ props.gedicht.analyses.length }}</span> -->
                     </button>
                 </div>
             </div>
@@ -97,22 +115,24 @@ function openAnalyse(analyse) {
                     absolute
                     bg-gray-900
                     left-0
+                    overflow-y-auto
                     right-0
                     w-full
-                    drop-shadow-2xl
                     duration-150
                     ease-in-out
                 "
                 :class="modalOpen ? 'bottom-0 top-36' : ' -bottom-36 top-full'"
             >
-                <div
-                    @click="openAnalyse(analyse)"
-                    v-for="analyse of props.gedicht.analyses"
-                    :key="analyse.id"
-                    class="card bg-gray-700"
-                >
-                    {{ analyse.user.name }}
-                </div>
+                <Analyses
+                    v-if="modalState == 'analyses'"
+                    @toggle-modal="toggleModal()"
+                    :gedicht="props.gedicht"
+                />
+                <template v-else>
+                    <Comments
+                        @toggle-modal="toggleModal()"
+                        :gedicht="props.comments"
+                /></template>
             </div>
         </div>
     </div>

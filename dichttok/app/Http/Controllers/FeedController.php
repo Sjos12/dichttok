@@ -13,7 +13,7 @@ class FeedController extends Controller
     public function __invoke()
     {
         return Inertia::render('Dashboard', [
-            'gedichten' => Gedicht::with('likes', 'comments', 'user', 'analyses', 'analyses.user')->orderBy('created_at', 'DESC')->get(),
+            'gedichten' => Gedicht::withCount('likes', 'comments', 'analyses')->with('user', 'analyses.user')->orderBy('created_at', 'DESC')->get(),
         ]);
     }
 }

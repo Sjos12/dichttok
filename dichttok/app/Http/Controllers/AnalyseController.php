@@ -44,7 +44,7 @@ class AnalyseController extends Controller
 
     public function detail(Request $request, Gedicht $gedicht, Analysis $analysis)
     {
-        $analysis->load('highlight_fragments.stijlmiddel');
+        $analysis->load('highlight_fragments.stijlmiddel', 'user');
         return Inertia::render('ViewGedichtAnalyse', [
             'gedicht' => $gedicht,
             'analysis' => $analysis,

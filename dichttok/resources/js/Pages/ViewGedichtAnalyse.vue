@@ -3,6 +3,7 @@ import { reactive, ref } from "@vue/reactivity";
 import AuthenticatedLayoutVue from "@/Layouts/AuthenticatedLayout.vue";
 import Stijlmiddel from "@/Components/Stijlmiddel.vue";
 import GedichtFragment from "@/Components/GedichtFragment.vue";
+import InputLabelVue from "@/Components/InputLabel.vue";
 const props = defineProps({
     gedicht: Object,
     analysis: Object,
@@ -61,7 +62,26 @@ function sortFragments() {
 </script>
 <template>
     <AuthenticatedLayoutVue>
+        <template class="flex" #header>
+            <div class="flex justify-between items-center">
+                <h2
+                    class="
+                        font-semibold
+                        text-xl text-gray-800
+                        dark:text-gray-200
+                        leading-tight
+                    "
+                >
+                    Analyse bekijken
+                </h2>
+            </div>
+        </template>
         <div class="card mx-auto">
+            <div class="flex">
+                <InputLabelVue>
+                    {{ props.analysis.user.name }}
+                </InputLabelVue>
+            </div>
             <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
                 <template v-for="(fragment, idx) of gedichtFragments">
                     <Stijlmiddel
@@ -84,7 +104,7 @@ function sortFragments() {
                         :content="
                             gedichtref.slice(fragment.start, fragment.end)
                         "
-                        :key="idx * 2"
+                        :key="idx + 1"
                     />
                 </template>
             </p>
