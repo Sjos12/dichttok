@@ -9,6 +9,12 @@ const props = defineProps({
     analysis: Object,
 });
 console.log(props.analysis);
+const displayInformationBox = ref(false);
+const activeHoverFragment = reactive({});
+const stijlmiddelPickerPosition = reactive({
+    x: null,
+    y: null,
+});
 const gedichtFragments = reactive([]);
 const gedichtref = ref(props.gedicht.gedicht);
 const highlightFragments = reactive(props.analysis.highlight_fragments);
@@ -60,28 +66,60 @@ function sortFragments() {
         return a.start - b.start;
     });
 }
+function showInformationBox(event, fragment) {
+    // var rect = event.target.getBoundingClientRect();
+    var x = event.clientX; //x position within the element.
+    var y = event.clientY;
+    stijlmiddelPickerPosition.x = x;
+    stijlmiddelPickerPosition.y = y;
+    displayInformationBox.value = true;
+
+    Object.assign(activeHoverFragment, fragment);
+}
+function hideInformationBox() {
+    displayInformationBox.value = false;
+}
 </script>
 <template>
-    <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
-        <template v-for="(fragment, idx) of gedichtFragments">
-            <Stijlmiddel
-                @mouseup="getSelectedText(fragment)"
-                v-if="fragment.type == 'highlight'"
-                :content="gedichtref.slice(fragment.start, fragment.end)"
-                :ref="
-                    (el) => {
-                        fragment.element = el;
-                    }
-                "
-                :stijlmiddel="fragment.stijlmiddel"
-                :key="idx"
-            />
-            <GedichtFragment
-                v-else
-                @mouseup="getSelectedText(fragment)"
-                :content="gedichtref.slice(fragment.start, fragment.end)"
-                :key="idx + 1"
-            />
-        </template>
-    </p>
+    <div class="relative">
+        <div class="absolute" v-show="displayInformationBox">
+            
+            <button
+                class="text-white shadow-md rounded-md p-2 duration-100"
+                :style="{
+                    backgroundColor: activeHoverFragment.stijlmiddel.color,
+                    top: stijlmiddelPickerPosition.y - 20 + 'px',
+                    left: stijlmiddelPickerPosition.x + 'px',
+                }"
+            >
+                {{ activeHoverFragment.stijlmiddel.name }}
+                <!-- {{ activeHoverFragment.id }} -->
+            </button>
+        </div>
+
+        <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
+            <template v-for="(fragment, idx) of gedichtFragments">
+                <Stijlmiddel
+                    @mouseleave="hideInformationBox"
+                    @mouseover="showInformationBox($event, fragment)"
+                    @mouseup="getSelectedText(fragment)"
+                    v-if="fragment.type == 'highlight'"
+                    :content="gedichtref.slice(fragment.start, fragment.end)"
+                    :ref="
+                        (el) => {
+                            fragment.element = el;
+                        }
+                    "
+                    :stijlmiddel="fragment.stijlmiddel"
+                    :key="idx"
+                />
+                <GedichtFragment
+                    v-else
+                    @mouseup="getSelectedText(fragment)"
+                    :content="gedichtref.slice(fragment.start, fragment.end)"
+                    :key="idx + 1"
+                />
+            </template>
+        </p>
+    </div>
 </template>

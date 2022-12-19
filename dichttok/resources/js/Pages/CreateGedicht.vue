@@ -9,7 +9,7 @@ import SecondaryButtonVue from "@/Components/SecondaryButton.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { reactive } from "@vue/reactivity";
 import { Inertia } from "@inertiajs/inertia";
-
+import GedichtRecorder from "@/Components/GedichtRecorder.vue";
 const props = defineProps({
     auth: Object,
 });
@@ -110,6 +110,7 @@ function gedichtDoorMijzelf() {
                 ></textarea>
             </div>
 
+            <GedichtRecorder />
             <PrimaryButtonVue
                 class="mx-auto"
                 type="button"

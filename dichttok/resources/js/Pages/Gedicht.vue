@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Comments from "@/Components/Comments.vue";
 import Analyses from "@/Components/Analyses.vue";
 import ViewGedichtAnalyse from "./ViewGedichtAnalyse.vue";
+import GedichtReader from "@/Components/GedichtReader.vue";
 const props = defineProps({
     gedicht: Object,
 });
@@ -96,6 +97,7 @@ function chooseAnalyse(analyse) {
                     <span class="mt-10 text-gray-300">
                         {{ "- " + props.gedicht.auteur }}
                     </span>
+                    <GedichtReader class="mt-auto" />
                 </div>
                 <div
                     class="pt-20 mt-auto text-white flex flex-col gap-y-6 my-10"
