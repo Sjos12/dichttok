@@ -34,6 +34,9 @@ function gedichtDoorMijzelf() {
     gedichtForm.zelfGeschreven = true;
     gedichtForm.auteur = props.auth.user.name;
 }
+function saveVoiceoverBlob(blob) {
+    gedichtForm.voiceover = blob;
+}
 </script>
 <template>
     <AuthenticatedLayoutVue>
@@ -110,7 +113,7 @@ function gedichtDoorMijzelf() {
                 ></textarea>
             </div>
 
-            <GedichtRecorder />
+            <GedichtRecorder @sound_file="saveVoiceoverBlob" />
             <PrimaryButtonVue
                 class="mx-auto"
                 type="button"

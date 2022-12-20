@@ -3,6 +3,7 @@ import { reactive, ref } from "@vue/reactivity";
 import PrimaryButtonVue from "./PrimaryButton.vue";
 import SecondaryButtonVue from "./SecondaryButton.vue";
 const isRecording = ref(false);
+const emit = defineEmits(["sound_file"]);
 const audio = ref("");
 let audioStream = {};
 let mediaRecorder = null;
@@ -29,6 +30,7 @@ function initMediaRecorder() {
 function stopRecording() {
     isRecording.value = false;
     mediaRecorder.stop();
+
     console.log(mediaRecorder.state);
     console.log("recorder stopped");
 }
@@ -40,7 +42,7 @@ function mediaRecorderStopped() {
     console.log();
     chunks = [];
     const audioURL = window.URL.createObjectURL(blob);
-
+    emit("sound_file", blob);
     audio.value = audioURL;
 }
 function getUserMedia() {

@@ -30,16 +30,26 @@ return [
 
     'disks' => [
 
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
             'throw' => false,
         ],
 
+
+        'audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/audio'),
+            'url' => env('APP_URL') . '/audio',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],

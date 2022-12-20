@@ -21,13 +21,15 @@ class GedichtController extends Controller
 
     public function create(Request $request)
     {
-
+        dd($request);
         $validatedData = $request->validate([
             'titel' => 'required',
             'gedicht' => 'required',
             'auteur' => 'required',
             'context' => '',
+            'voiceover' => '',
         ]);
+
 
         $model = new Gedicht($validatedData);
         $model->user_id = Auth::user()->id;
