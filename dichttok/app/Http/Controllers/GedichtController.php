@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gedicht;
 use App\Models\Like;
 use App\Models\Stijlmiddel;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
@@ -21,7 +22,8 @@ class GedichtController extends Controller
 
     public function create(Request $request)
     {
-        dd($request);
+
+
         $validatedData = $request->validate([
             'titel' => 'required',
             'gedicht' => 'required',
@@ -31,9 +33,13 @@ class GedichtController extends Controller
         ]);
 
 
+
         $model = new Gedicht($validatedData);
         $model->user_id = Auth::user()->id;
         $model->save();
+        if ($validatedData['voiceover']) {
+            $model->addMedia($validatedData['voiceover'])->toMediaCollection(('audio'));
+        }
 
         return redirect()->route('dashboard');
     }

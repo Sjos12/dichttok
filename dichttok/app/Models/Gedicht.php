@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 
-class Gedicht extends Model
+
+class Gedicht extends Model implements HasMedia
 {
-    use HasFactory, GeneratesUuid;
+    use HasFactory, GeneratesUuid, InteractsWithMedia;
 
     protected $table = 'gedichten';
     protected $appends = ['is_liked', 'is_analysed'];
