@@ -59,10 +59,8 @@ function chooseAnalyse(analyse) {
 }
 </script>
 <template>
-    <div
-        class="relative overflow-y-hidden mx-auto h-full max-h-screen max-w-xl"
-    >
-        <div class="card h-full flex flex-col gap-y-5">
+    <div class="relative overflow-y-hidden mx-auto h-screen max-w-xl">
+        <div class="card h-full flex w-full flex-col gap-y-5">
             <div class="flex w-full justify-between items-center">
                 <InputLabelVue>
                     {{ props.gedicht.user.name }}
@@ -72,7 +70,7 @@ function chooseAnalyse(analyse) {
                 </InputLabelVue>
             </div>
             <div class="flex h-full gap-3">
-                <div class="flex flex-col gap-y-5">
+                <div class="flex flex-col gap-y-5 shrink-0 grow">
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
                     </h1>
@@ -100,7 +98,15 @@ function chooseAnalyse(analyse) {
                     <GedichtReader class="mt-auto" />
                 </div>
                 <div
-                    class="pt-20 mt-auto text-white flex flex-col gap-y-6 my-10"
+                    class="
+                        text-white
+                        flex flex-col
+                        gap-y-5
+                        mt-auto
+                        my-10
+                        grow-0
+                        shrink
+                    "
                 >
                     <button class="flex flex-col gap-y-5" @click="sendLike">
                         <i
@@ -112,12 +118,18 @@ function chooseAnalyse(analyse) {
                         </span>
                     </button>
 
-                    <button class="flex flex-col gap-y-5" @click="openComments">
+                    <button
+                        class="flex py-5 flex-col gap-y-5"
+                        @click="openComments"
+                    >
                         <i class="fa fa-comments fa-xl"></i>
                         <!-- <span>{{ 1 }}</span> -->
                     </button>
 
-                    <button class="flex flex-col gap-y-5" @click="openAnalyses">
+                    <button
+                        class="flex py-5 flex-col gap-y-5"
+                        @click="openAnalyses"
+                    >
                         <i class="fa fa-magnifying-glass-chart fa-xl"></i>
 
                         <!-- <span>{{ props.gedicht.analyses.length }}</span> -->
