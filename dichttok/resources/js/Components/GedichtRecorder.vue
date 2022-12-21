@@ -38,8 +38,7 @@ function stopRecording() {
 function mediaRecorderStopped() {
     console.log(chunks);
     console.log("mediaRecorderStopped");
-    const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
-    console.log();
+    const blob = new Blob(chunks, { type: "audio/mpeg3; codecs=opus" });
     chunks = [];
     const audioURL = window.URL.createObjectURL(blob);
     emit("sound_file", blob);

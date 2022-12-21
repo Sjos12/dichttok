@@ -35,7 +35,8 @@ function gedichtDoorMijzelf() {
     gedichtForm.auteur = props.auth.user.name;
 }
 function saveVoiceoverBlob(blob) {
-    gedichtForm.voiceover = blob;
+    var file = new File([blob], "voiceover.mp3");
+    gedichtForm.voiceover = file;
 }
 </script>
 <template>
