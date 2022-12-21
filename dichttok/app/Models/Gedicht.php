@@ -16,7 +16,7 @@ class Gedicht extends Model implements HasMedia
     use HasFactory, GeneratesUuid, InteractsWithMedia;
 
     protected $table = 'gedichten';
-    protected $appends = ['is_liked', 'is_analysed'];
+    protected $appends = ['is_liked', 'is_analysed', 'voiceover'];
     protected $fillable = [
         'titel',
         'gedicht',
@@ -58,6 +58,14 @@ class Gedicht extends Model implements HasMedia
             get: function () {
                 if ($this->analyses->where('user_id', Auth::user()->id)->isNotEmpty()) return true;
                 return false;
+            },
+        );
+    }
+    protected function voiceover(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->getFirstMediaUrl('audio');
             },
         );
     }

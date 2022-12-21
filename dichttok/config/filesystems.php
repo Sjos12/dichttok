@@ -41,7 +41,7 @@ return [
         'audio' => [
             'driver' => 'local',
             'root' => storage_path('app/audio'),
-            'url' => env('APP_URL') . '/audio',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -80,7 +80,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage') => storage_path('app/audio'),
     ],
 
 ];

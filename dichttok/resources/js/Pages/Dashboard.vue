@@ -7,6 +7,7 @@ import GedichtVue from "./Gedicht.vue";
 const props = defineProps({
     gedichten: Object,
 });
+console.log(props.gedichten);
 function gedichtMaken() {
     let url = route("gedicht.create.index");
     Inertia.visit(url);
@@ -45,21 +46,6 @@ function gedichtMaken() {
                     v-bind:key="gedicht.id"
                     :gedicht="gedicht"
                 ></GedichtVue>
-                <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div
-                        class="
-                            bg-white
-                            dark:bg-gray-800
-                            overflow-hidden
-                            shadow-sm
-                            sm:rounded-lg
-                        "
-                    >
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                            You're logged in!
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </AuthenticatedLayout>
     </div>

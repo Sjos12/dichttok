@@ -2,7 +2,7 @@
 import InputLabelVue from "@/Components/InputLabel.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
-import { computed, reactive, ref } from "@vue/runtime-core";
+import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
 import { DateTime } from "luxon";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Comments from "@/Components/Comments.vue";
@@ -18,7 +18,7 @@ const analyseIsOpen = ref(false);
 let createdAt = computed(() => {
     return DateTime.fromISO(props.gedicht.created_at).toRelative();
 });
-
+const gedichtElement = ref(null);
 function sendLike() {
     let url = route("gedicht.like", props.gedicht.uuid);
     Inertia.post(
@@ -36,6 +36,38 @@ let modalState = ref("comments");
 const likedGedicht = computed(() => {
     return props.gedicht.is_liked;
 });
+
+const shouldPlayAudio = ref(false);
+let audio = new Audio(props.gedicht.voiceover);
+onMounted(() => {
+    if (!gedichtElement || !props.gedicht.voiceover) return false;
+    let observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) playAudio();
+            else {
+                stopPlayingAudio();
+            }
+        },
+        {
+            threshold: 0.7,
+        }
+    );
+
+    observer.observe(gedichtElement.value);
+});
+
+function playAudio() {
+    shouldPlayAudio.value = true;
+    console.log("play audio", props.gedicht.titel);
+    audio.play();
+}
+function stopPlayingAudio() {
+    if (!audio) return;
+    shouldPlayAudio.value = false;
+    console.log("stop audio", props.gedicht.titel);
+    audio.pause();
+    audio.currentTime = 0;
+}
 function analyzeGedicht() {
     let url = route("gedicht.analyze.index", props.gedicht.uuid);
     Inertia.get(url);
@@ -59,7 +91,7 @@ function chooseAnalyse(analyse) {
 }
 </script>
 <template>
-    <div class="relative overflow-y-hidden mx-auto h-screen max-w-xl">
+    <div ref="gedichtElement" class="relative mx-auto h-screen max-w-xl">
         <div class="card h-full flex w-full flex-col gap-y-5">
             <div class="flex w-full justify-between items-center">
                 <InputLabelVue>
@@ -135,6 +167,14 @@ function chooseAnalyse(analyse) {
                         <!-- <span>{{ props.gedicht.analyses.length }}</span> -->
                     </button>
                 </div>
+            </div>
+            <div v-if="props.gedicht.voiceover" class="flex w-full">
+                <button>
+                    <i
+                        class="fa fa-xl text-white"
+                        :class="shouldPlayAudio ? 'fa-pause' : 'fa-play'"
+                    ></i>
+                </button>
             </div>
             <div
                 @click.self="toggleModal"
