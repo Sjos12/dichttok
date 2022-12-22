@@ -62,6 +62,8 @@ class Stijlmiddelseeder extends Seeder
             ]
         ];
 
-        Stijlmiddel::insert($stijlmiddelen);
+        foreach ($stijlmiddelen as $stijlmiddel) {
+            Stijlmiddel::create($stijlmiddel);
+        }
     }
 }

@@ -22,7 +22,12 @@ class Gedicht extends Model implements HasMedia
         'gedicht',
         'auteur',
         'context',
+
     ];
+    public function highlight_fragments()
+    {
+        return $this->hasManyThrough(HighlightFragment::class, Analysis::class);
+    }
     public function likes()
     {
         return $this->hasMany(Like::class);

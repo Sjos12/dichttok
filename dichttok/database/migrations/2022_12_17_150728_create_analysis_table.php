@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->foreignId('user_id');
             $table->foreignId('gedicht_id');
+            
             $table->timestamps();
         });
     }

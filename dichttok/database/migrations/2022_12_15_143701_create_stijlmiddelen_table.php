@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('stijlmiddelen', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->string('name')->comment('Name of this stijlmiddel');
             $table->string('color')->comment('Tailwind class of highlighted color of this stijlmiddel');
             $table->timestamps();

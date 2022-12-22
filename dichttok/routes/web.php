@@ -5,6 +5,7 @@ use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GedichtController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StijlmiddelController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/gedicht/{gedicht:uuid}/analyze', [AnalyseController::class, 'create'])->name('gedicht.analyze.create');
 
     Route::get('/gedicht/{gedicht:uuid}/analysis/{analysis:uuid}/detail', [AnalyseController::class, 'detail'])->name('gedicht.analyze.detail');
+
+    Route::get('/stijlmiddel/{stijlmiddel:uuid}', [StijlmiddelController::class, 'detail'])->name('stijlmiddel.detail');
+
+    Route::get('/stijlmiddelen', [StijlmiddelController::class, 'list'])->name('stijlmiddelen');
 });
 
 require __DIR__ . '/auth.php';

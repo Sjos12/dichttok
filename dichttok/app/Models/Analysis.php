@@ -20,6 +20,6 @@ class Analysis extends Model
     }
     public function highlight_fragments()
     {
-        return $this->hasMany(HighlightFragment::class);
+        return $this->hasMany(HighlightFragment::class, 'analysis_id');
     }
 }
