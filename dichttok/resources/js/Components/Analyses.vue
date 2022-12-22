@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 const props = defineProps({
     gedicht: Object,
 });
@@ -13,8 +14,8 @@ const emits = defineEmits(["toggleModal", "chooseAnalyse"]);
         ></div>
         <div class="flex justify-between">
             <h1 class="text-gray-200 text-xl font-medium">Analyses</h1>
-            <Link :href="route('gedicht.analyze.index', props.gedicht.uuid)">
-                <PrimaryButton>Analyse maken</PrimaryButton>
+            <Link :href="$route('gedicht.analyze.index', props.gedicht.uuid)">
+                Analyse maken
             </Link>
         </div>
 

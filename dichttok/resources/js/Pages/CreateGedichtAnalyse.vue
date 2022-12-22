@@ -15,7 +15,7 @@ const props = defineProps({
     stijlmiddelen: Object,
 });
 
-const activeHighlightObject = reactive({});
+let activeHighlightObject = reactive({});
 
 const highlightFragments = reactive([]);
 
@@ -32,21 +32,22 @@ const gedichtref = ref(props.gedicht.gedicht);
 const stijlmiddelPickerPosition = reactive({ x: null, y: null });
 function getSelectedText(fragment) {
     console.log(fragment.start);
+
     // Reset activehighlight object
-    let activeObject = {
+    activeHighlightObject = reactive({
         start: 0,
         end: 0,
         type: "highlight",
         stijlmiddel: props.stijlmiddelen[0],
-    };
+    });
     let selection = getSelection();
 
     if (selection.anchorOffset < selection.focusOffset) {
-        activeObject.start = fragment.start + selection.anchorOffset;
-        activeObject.end = fragment.start + selection.focusOffset;
+        activeHighlightObject.start = fragment.start + selection.anchorOffset;
+        activeHighlightObject.end = fragment.start + selection.focusOffset;
     } else {
-        activeObject.start = fragment.start + selection.focusOffset;
-        activeObject.end = fragment.start + selection.anchorOffset;
+        activeHighlightObject.start = fragment.start + selection.focusOffset;
+        activeHighlightObject.end = fragment.start + selection.anchorOffset;
     }
     let oRange = selection.getRangeAt(0); //get the text range
     let oRect = oRange.getBoundingClientRect();
@@ -54,15 +55,11 @@ function getSelectedText(fragment) {
     stijlmiddelPickerPosition.x = oRect.x;
     stijlmiddelPickerPosition.y = oRect.y;
 
-    // highlightFragments.splice(0);
+    highlightFragments.push(activeHighlightObject);
 
-    highlightFragments.push(activeObject);
     sortHighlightFragments();
-
     splitUpGedicht();
     sortFragments();
-
-    console.log(gedichtFragments, highlightFragments);
 }
 
 function getSelection() {
@@ -84,8 +81,6 @@ function splitUpGedicht() {
     });
 
     // Indiced must be sorted... [{start: x, end: y}, {start: a, end: a}]
-
-    // uneditedIndices = [];
 
     // unedited fragment
     gedichtFragments.splice(0, 0, {
@@ -134,6 +129,9 @@ function submit() {
         highlightFragments,
     });
 }
+function setActiveObjectStijlmiddel(stijlmiddel) {
+    activeHighlightObject.stijlmiddel = stijlmiddel;
+}
 </script>
 <template>
     <AuthenticatedLayoutVue>
@@ -147,7 +145,7 @@ function submit() {
                         leading-tight
                     "
                 >
-                    Analyse maken 
+                    Analyse maken
                 </h2>
             </div>
         </template>
@@ -156,6 +154,7 @@ function submit() {
             class="
                 card
                 flex
+                z-50
                 gap-3
                 absolute
                 shadow-lg
@@ -178,7 +177,7 @@ function submit() {
                         ? 'border-b-2 border-b-white font-medium'
                         : ''
                 "
-                @click="activeHighlightObject.stijlmiddel = stijlmiddel"
+                @click="setActiveObjectStijlmiddel(stijlmiddel)"
             >
                 {{ stijlmiddel.name }}
             </button>
@@ -211,7 +210,7 @@ function submit() {
                 </template>
             </p>
 
-            <div class="flex">
+            <div class="flex mt-5">
                 <PrimaryButton @click="submit" class="ml-auto"
                     >Opslaan</PrimaryButton
                 >

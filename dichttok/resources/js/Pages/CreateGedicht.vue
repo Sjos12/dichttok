@@ -74,7 +74,7 @@ function saveVoiceoverBlob(blob) {
                     class="form-control h-64"
                 ></textarea>
                 <span class="ml-auto text-gray-300 font-thin text-sm">
-                    {{ gedichtForm.gedicht.length + " / 500" }} characters
+                    {{ gedichtForm.gedicht.length + " / 1000" }} characters
                 </span>
             </div>
             <div class="grid gap-y-3">

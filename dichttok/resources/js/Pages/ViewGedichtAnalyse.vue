@@ -82,8 +82,7 @@ function hideInformationBox() {
 </script>
 <template>
     <div class="relative">
-        <div class="absolute" v-show="displayInformationBox">
-            
+        <div class="absolute" v-if="displayInformationBox">
             <button
                 class="text-white shadow-md rounded-md p-2 duration-100"
                 :style="{

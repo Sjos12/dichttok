@@ -10,7 +10,7 @@
 
 @layer components {
     .card {
-        @apply w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg;
+        @apply w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 drop-shadow-lg overflow-hidden sm:rounded-lg;
     }
     .form-control {
         @apply border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm;
