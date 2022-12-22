@@ -25,7 +25,7 @@ function sendLike() {
         url,
         {},
         {
-            preserveState: false,
+            preserveState: true,
             preserveScroll: true,
         }
     );
@@ -38,7 +38,8 @@ const likedGedicht = computed(() => {
 });
 
 const shouldPlayAudio = ref(false);
-let audio = new Audio(props.gedicht.voiceover);
+let audio = reactive(new Audio(props.gedicht.voiceover));
+audio.loop = true;
 onMounted(() => {
     if (!gedichtElement || !props.gedicht.voiceover) return false;
     let observer = new IntersectionObserver(
@@ -102,7 +103,7 @@ function chooseAnalyse(analyse) {
                 </InputLabelVue>
             </div>
             <div class="flex h-full gap-3">
-                <div class="flex flex-col gap-y-5 shrink-0 grow">
+                <div class="flex flex-col gap-y-5 w-full overflow-x-auto">
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
                     </h1>
@@ -168,12 +169,15 @@ function chooseAnalyse(analyse) {
                     </button>
                 </div>
             </div>
-            <div v-if="props.gedicht.voiceover" class="flex w-full">
-                <button>
+            <div class="flex w-full">
+                <button v-if="props.gedicht.voiceover">
                     <i
                         class="fa fa-xl text-white"
                         :class="shouldPlayAudio ? 'fa-pause' : 'fa-play'"
                     ></i>
+                </button>
+                <button v-else>
+                    <i class="fa-solid fa-xl fa-volume-xmark text-white"></i>
                 </button>
             </div>
             <div
