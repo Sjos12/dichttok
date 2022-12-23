@@ -96,7 +96,16 @@ function hideInformationBox() {
             </button>
         </div>
 
-        <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
+        <p
+            class="
+                text-gray-100
+                mt-5
+                text-lg
+                font-light
+                leading-loose
+                whitespace-pre-wrap
+            "
+        >
             <template v-for="(fragment, idx) of gedichtFragments">
                 <Stijlmiddel
                     @mouseleave="hideInformationBox"
@@ -111,12 +120,14 @@ function hideInformationBox() {
                     "
                     :stijlmiddel="fragment.stijlmiddel"
                     :key="idx"
+                    class="whitespace-pre-wrap"
                 />
                 <GedichtFragment
                     v-else
                     @mouseup="getSelectedText(fragment)"
                     :content="gedichtref.slice(fragment.start, fragment.end)"
                     :key="idx + 1"
+                    class="whitespace-pre-wrap"
                 />
             </template>
         </p>

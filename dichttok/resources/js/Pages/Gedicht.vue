@@ -41,7 +41,6 @@ const shouldPlayAudio = ref(false);
 let audio = reactive(new Audio(props.gedicht.voiceover));
 audio.loop = true;
 
-
 onMounted(() => {
     if (!gedichtElement || !props.gedicht.voiceover) return false;
     let observer = new IntersectionObserver(
@@ -58,8 +57,6 @@ onMounted(() => {
 
     observer.observe(gedichtElement.value);
 });
-
-
 
 function playAudio() {
     shouldPlayAudio.value = true;
@@ -125,12 +122,12 @@ function chooseAnalyse(analyse) {
                     >
                         {{ gedicht }}
                     </p>
-                    <p v-if="analyseIsOpen && activeAnalyse">
+                    <template v-if="analyseIsOpen && activeAnalyse">
                         <ViewGedichtAnalyse
-                            :gedicht="gedicht"
+                            :gedicht="props.gedicht"
                             :analysis="activeAnalyse"
                         />
-                    </p>
+                    </template>
                     <span class="mt-10 text-gray-300">
                         {{ "- " + props.gedicht.auteur }}
                     </span>

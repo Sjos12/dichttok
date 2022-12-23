@@ -184,7 +184,16 @@ function setActiveObjectStijlmiddel(stijlmiddel) {
             </button>
         </div>
         <div class="card mx-auto">
-            <p class="text-gray-100 mt-5 text-lg font-light leading-loose">
+            <p
+                class="
+                    text-gray-100
+                    mt-5
+                    text-lg
+                    font-light
+                    leading-loose
+                    whitespace-pre-wrap
+                "
+            >
                 <template v-for="(fragment, idx) of gedichtFragments">
                     <Stijlmiddel
                         @mouseup="getSelectedText(fragment)"
