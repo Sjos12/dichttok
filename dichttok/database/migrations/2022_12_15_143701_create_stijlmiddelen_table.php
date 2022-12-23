@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->string('name')->comment('Name of this stijlmiddel');
+            $table->text('description')->nullable();
             $table->string('color')->comment('Tailwind class of highlighted color of this stijlmiddel');
             $table->timestamps();
         });

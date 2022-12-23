@@ -37,8 +37,13 @@ const props = defineProps({
                     v-for="stijlmiddel of stijlmiddelen"
                     :key="stijlmiddel.uuid"
                     :href="route('stijlmiddel.detail', stijlmiddel.uuid)"
-                    class="card"
+                    class="card flex gap-3"
                 >
+                    <span
+                        class="p-2 rounded-full h-full w-2"
+                        :style="{ backgroundColor: stijlmiddel.color }"
+                    >
+                    </span>
                     <h2 class="text-white">
                         {{ stijlmiddel.name }}
                     </h2>

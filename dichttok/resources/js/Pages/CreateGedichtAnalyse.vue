@@ -49,6 +49,7 @@ function getSelectedText(fragment) {
         activeHighlightObject.start = fragment.start + selection.focusOffset;
         activeHighlightObject.end = fragment.start + selection.anchorOffset;
     }
+    if (activeHighlightObject.end - activeHighlightObject.start == 0) return;
     let oRange = selection.getRangeAt(0); //get the text range
     let oRect = oRange.getBoundingClientRect();
 

@@ -6,7 +6,11 @@
    body {
     @apply tracking-normal;
    }
+    p {
+        @apply break-words
+    }
 }
+
 
 @layer components {
     .card {

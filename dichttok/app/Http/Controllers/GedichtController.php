@@ -28,16 +28,14 @@ class GedichtController extends Controller
             'titel' => 'required',
             'gedicht' => 'required',
             'auteur' => 'required',
-            'context' => '',
-            'voiceover' => '',
+            'context' => 'nullable',
+            'voiceover' => 'nullable',
         ]);
-
-
 
         $model = new Gedicht($validatedData);
         $model->user_id = Auth::user()->id;
         $model->save();
-        if ($validatedData['voiceover']) {
+        if (array_key_exists('voiceover', $validatedData)) {
             $model->addMedia($validatedData['voiceover'])->toMediaCollection(('audio'));
         }
 

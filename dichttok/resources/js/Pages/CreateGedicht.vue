@@ -38,6 +38,9 @@ function saveVoiceoverBlob(blob) {
     var file = new File([blob], "voiceover.mp3");
     gedichtForm.voiceover = file;
 }
+function addLineBreak() {
+    gedichtForm.gedicht += "<br>";
+}
 </script>
 <template>
     <AuthenticatedLayoutVue>
@@ -68,9 +71,11 @@ function saveVoiceoverBlob(blob) {
             </div>
             <div class="grid gap-y-3">
                 <InputLabelVue>Jouw gedicht*</InputLabelVue>
+                {{ gedichtForm.gedicht }}
                 <textarea
                     spellcheck="false"
                     v-model="gedichtForm.gedicht"
+                    @keydown.enter.prevent="addLineBreak"
                     class="form-control h-64"
                 ></textarea>
                 <span class="ml-auto text-gray-300 font-thin text-sm">

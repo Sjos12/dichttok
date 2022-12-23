@@ -36,10 +36,12 @@ let modalState = ref("comments");
 const likedGedicht = computed(() => {
     return props.gedicht.is_liked;
 });
-
+const gedicht = ref(props.gedicht.gedicht);
 const shouldPlayAudio = ref(false);
 let audio = reactive(new Audio(props.gedicht.voiceover));
 audio.loop = true;
+
+
 onMounted(() => {
     if (!gedichtElement || !props.gedicht.voiceover) return false;
     let observer = new IntersectionObserver(
@@ -56,6 +58,8 @@ onMounted(() => {
 
     observer.observe(gedichtElement.value);
 });
+
+
 
 function playAudio() {
     shouldPlayAudio.value = true;
@@ -107,9 +111,11 @@ function chooseAnalyse(analyse) {
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
                     </h1>
+
                     <p
                         v-if="!analyseIsOpen"
                         class="
+                            whitespace-pre-wrap
                             text-gray-100
                             mt-5
                             text-lg
@@ -117,11 +123,11 @@ function chooseAnalyse(analyse) {
                             leading-loose
                         "
                     >
-                        {{ props.gedicht.gedicht }}
+                        {{ gedicht }}
                     </p>
                     <p v-if="analyseIsOpen && activeAnalyse">
                         <ViewGedichtAnalyse
-                            :gedicht="props.gedicht"
+                            :gedicht="gedicht"
                             :analysis="activeAnalyse"
                         />
                     </p>

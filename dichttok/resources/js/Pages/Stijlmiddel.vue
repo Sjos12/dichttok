@@ -10,7 +10,7 @@ console.log(props.fragments);
 <template>
     <AuthenticatedLayoutVue>
         <template class="flex" #header>
-            <div class="flex justify-between items-center">
+            <div class="flex flex-col gap-y-5">
                 <h1
                     class="
                         font-semibold
@@ -21,6 +21,18 @@ console.log(props.fragments);
                 >
                     {{ stijlmiddel.name }}
                 </h1>
+                <p
+                    v-if="stijlmiddel.description"
+                    class="
+                        text-white
+                        font-sans
+                        tracking-wide
+                        text-md
+                        font-light
+                    "
+                >
+                    {{ stijlmiddel.description }}
+                </p>
             </div>
         </template>
 
