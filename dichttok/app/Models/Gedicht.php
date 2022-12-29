@@ -48,6 +48,11 @@ class Gedicht extends Model implements HasMedia
         return $this->hasMany(Analysis::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     protected function isLiked(): Attribute
     {
         return Attribute::make(
