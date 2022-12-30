@@ -94,7 +94,7 @@ function chooseAnalyse(analyse) {
 </script>
 <template>
     <div ref="gedichtElement" class="relative mx-auto h-screen max-w-xl">
-        <div class="card h-full flex w-full flex-col gap-y-5">
+        <div class="card mx-auto h-full flex w-full flex-col gap-y-5">
             <div class="flex w-full justify-between items-center">
                 <InputLabelVue>
                     {{ props.gedicht.user.name }}

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GedichtenSeeder::class,
             Stijlmiddelseeder::class,
+            TagSeeder::class,
         ]);
     }
 }

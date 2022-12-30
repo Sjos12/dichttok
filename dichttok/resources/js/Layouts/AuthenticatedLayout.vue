@@ -6,7 +6,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/inertia-vue3";
-
+import MainSearch from "@/Components/MainSearch.vue";
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -27,7 +27,7 @@ const showingNavigationDropdown = ref(false);
             >
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                    <div class="flex relative justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
@@ -65,8 +65,15 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Stijlmiddelen
                                 </NavLink>
+                                <NavLink
+                                    :href="route('genres')"
+                                    :active="route().current('genres')"
+                                >
+                                    Genre's
+                                </NavLink>
                             </div>
                         </div>
+                        <!-- <MainSearch /> -->
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->

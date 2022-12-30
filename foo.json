@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Alliteratie",
+        "description": "Hier komt de uitleg", 
+        "color": "{hex code for color associated with stijlmiddel}"
+    },
+    {
+        "name": "Enjambemenet",
+        "description": "Hier komt de uitleg", 
+        "color": "{hex code for color associated with stijlmiddel}"
+    }
+]

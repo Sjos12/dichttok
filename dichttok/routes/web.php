@@ -4,7 +4,9 @@ use App\Http\Controllers\AnalyseController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GedichtController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StijlmiddelController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', FeedController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard/filter/{tag:uuid}', [FeedController::class, 'filter'])->name('dashboard.filter');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -51,6 +55,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/stijlmiddel/{stijlmiddel:uuid}', [StijlmiddelController::class, 'detail'])->name('stijlmiddel.detail');
 
     Route::get('/stijlmiddelen', [StijlmiddelController::class, 'list'])->name('stijlmiddelen');
+
+    Route::get('/search/{query}', [SearchController::class, 'search'])->name('search');
+
+    Route::get('/genres', [GenreController::class, 'list'])->name('genres');
+
+    Route::get('/genre/{tag:uuid}', [GenreController::class, 'detail'])->name('genre.detail');
 });
+
+
 
 require __DIR__ . '/auth.php';

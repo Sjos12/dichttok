@@ -9,11 +9,11 @@ use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
-
+use Laravel\Scout\Searchable;
 
 class Gedicht extends Model implements HasMedia
 {
-    use HasFactory, GeneratesUuid, InteractsWithMedia;
+    use HasFactory, GeneratesUuid, InteractsWithMedia, Searchable;
 
     protected $table = 'gedichten';
     protected $appends = ['is_liked', 'is_analysed', 'voiceover'];
@@ -55,8 +55,10 @@ class Gedicht extends Model implements HasMedia
 
     protected function isLiked(): Attribute
     {
+
         return Attribute::make(
             get: function () {
+                if (!Auth::check()) return;
                 if ($this->likes->where('user_id', Auth::user()->id)->isNotEmpty()) return true;
                 return false;
             },
@@ -66,6 +68,7 @@ class Gedicht extends Model implements HasMedia
     {
         return Attribute::make(
             get: function () {
+                if (!Auth::check()) return;
                 if ($this->analyses->where('user_id', Auth::user()->id)->isNotEmpty()) return true;
                 return false;
             },
