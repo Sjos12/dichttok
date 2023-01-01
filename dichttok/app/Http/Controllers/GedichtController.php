@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gedicht;
 use App\Models\Like;
 use App\Models\Stijlmiddel;
+use App\Models\Tag;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class GedichtController extends Controller
 
     public function create_index()
     {
-        return Inertia::render('CreateGedicht', []);
+        return Inertia::render('CreateGedicht', [
+            'genres' => Tag::all(),
+        ]);
     }
     //
 

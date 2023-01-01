@@ -73,8 +73,8 @@ function gedichtMaken() {
                         <PrimaryButtonVue
                             type="button"
                             @click="gedichtMaken"
-                            class=""
-                            >Gedicht Maken</PrimaryButtonVue
+                            class="whitespace-nowrap"
+                            >Gedicht Uploaden</PrimaryButtonVue
                         >
                     </div>
                 </div>

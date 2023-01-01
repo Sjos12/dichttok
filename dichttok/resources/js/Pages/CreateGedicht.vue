@@ -10,8 +10,10 @@ import { useForm } from "@inertiajs/inertia-vue3";
 import { reactive } from "@vue/reactivity";
 import { Inertia } from "@inertiajs/inertia";
 import GedichtRecorder from "@/Components/GedichtRecorder.vue";
+import AddGenreVue from "@/Components/AddGenre.vue";
 const props = defineProps({
     auth: Object,
+    genres: Array,
 });
 const gedichtForm = reactive({
     titel: "",
@@ -120,6 +122,7 @@ function addLineBreak() {
             </div>
 
             <GedichtRecorder @sound_file="saveVoiceoverBlob" />
+            <AddGenreVue :genres="props.genres" />
             <PrimaryButtonVue
                 class="mx-auto"
                 type="button"
