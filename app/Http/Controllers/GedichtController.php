@@ -17,7 +17,7 @@ class GedichtController extends Controller
 
     public function create_index()
     {
-        return Inertia::render('CreateGedicht', [
+        return Inertia::render('CreateGedicht/CreateGedicht', [
             'genres' => Tag::all(),
         ]);
     }

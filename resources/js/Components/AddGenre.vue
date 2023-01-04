@@ -4,6 +4,8 @@ import Dropdown from "./Dropdown.vue";
 const props = defineProps({
     genres: Array,
 });
+
+defineEmits(["genre_select"]);
 </script>
 <template>
     <div class="grid gap-y-3">
