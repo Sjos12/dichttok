@@ -58,9 +58,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/search/{query}', [SearchController::class, 'search'])->name('search');
 
-    Route::get('/genres', [GenreController::class, 'list'])->name('genres');
+    // Route::get('/genres', [GenreController::class, 'list'])->name('genres');
 
-    Route::get('/genre/{tag:uuid}', [GenreController::class, 'detail'])->name('genre.detail');
+    // Route::get('/genre/{tag:uuid}', [GenreController::class, 'detail'])->name('genre.detail');
 });
 
 

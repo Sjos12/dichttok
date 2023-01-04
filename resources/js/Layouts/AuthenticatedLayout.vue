@@ -65,12 +65,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Stijlmiddelen
                                 </NavLink>
-                                <NavLink
+                                <!-- <NavLink
                                     :href="route('genres')"
                                     :active="route().current('genres')"
                                 >
                                     Genre's
-                                </NavLink>
+                                </NavLink> -->
                             </div>
                         </div>
                         <!-- <MainSearch /> -->
