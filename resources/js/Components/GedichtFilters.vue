@@ -1,9 +1,52 @@
 <script setup>
 import Dropdown from "./Dropdown.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { reactive, ref } from "@vue/reactivity";
+import InputLabelVue from "./InputLabel.vue";
 const props = defineProps({
     genres: Array,
 });
+// import { Ref } from "vue";
+const query = ref("");
+const debounceTime = 250;
+
+const genres = ref(props.genres);
+
+const loading = ref(false);
+async function performSearch() {
+    loading.value = true;
+    console.log("performed search");
+    let url = route("search_genres", {
+        query: query.value,
+    });
+
+    const responsePromise = await fetch(url, {
+        method: "GET",
+    });
+
+    const responseObject = await responsePromise.json();
+
+    if (query.value == "") {
+        genres.value = props.genres;
+    } else {
+        genres.value = responseObject.genres;
+    }
+    loading.value = false;
+}
+
+function debounce(fn) {
+    console.log("debounce");
+    let timer;
+    console.log(timer);
+    if (timer) {
+        clearTimeout(timer); // clear any pre-existing timer
+    }
+    const context = this; // get the current context
+    timer = setTimeout(() => {
+        console.log("call fn");
+        fn.apply(context); // call the function if time expires
+    }, debounceTime);
+}
 </script>
 <template>
     <div class="w-full">
@@ -52,32 +95,72 @@ const props = defineProps({
             </template>
 
             <template #content>
-                <div class="grid p-4 gap-5 w-full grid-cols-3">
-                    <Link
-                        v-for="genre of props.genres"
-                        :key="genre.uuid"
-                        :href="route('dashboard.filter', genre.uuid)"
-                        class="
-                            rounded-full
-                            justify-center
-                            items-center
-                            px-4
-                            py-1
-                            flex
-                            gap-3
-                            color-white
-                        "
-                        :style="{ backgroundColor: genre.color }"
+                <div
+                    @click.stop=""
+                    class="
+                        w-full
+                        flex
+                        py-2
+                        place-items-center
+                        gap-5
+                        duration-300
+                        ease-in
+                    "
+                >
+                    <input
+                        @input="debounce(() => performSearch())"
+                        v-model="query"
+                        placeholder="Zoek een genre"
+                        type="text"
+                        class="form-control px-5 py-1 mx-auto rounded-full"
+                    />
+                </div>
+                <div class="min-h-full w-full p-4">
+                    <div v-if="loading" class="m-auto w-full flex">
+                        <i
+                            class="
+                                fa fa-circle-notch fa-xl
+                                m-auto
+                                text-white
+                                animate-spin
+                            "
+                        ></i>
+                    </div>
+                    <div v-if="genres.length == 0 && !loading">
+                        <InputLabelVue class="w-full text-center"
+                            >Geen genres gevonden</InputLabelVue
+                        >
+                    </div>
+                    <div
+                        v-if="genres.length > 0"
+                        class="grid gap-5 w-full grid-cols-3"
                     >
-                        <!-- <span
-                            class="p-2 rounded-full h-full w-2"
+                        <Link
+                            v-for="genre of genres"
+                            :key="genre.uuid"
+                            :href="route('dashboard.filter', genre.uuid)"
+                            class="
+                                rounded-full
+                                justify-center
+                                items-center
+                                px-4
+                                py-1
+                                flex
+                                gap-3
+                                color-white
+                            "
                             :style="{ backgroundColor: genre.color }"
                         >
-                        </span> -->
-                        <h2 class="text-white">
-                            {{ genre.name }}
-                        </h2>
-                    </Link>
+                            <!-- <span
+                                class="p-2 rounded-full h-full w-2"
+                                :style="{ backgroundColor: genre.color }"
+                            >
+                            </span> -->
+                            <h2 class="text-white">
+                                {{ genre.name }}
+                            </h2>
+                        </Link>
+                    </div>
                 </div>
             </template>
         </Dropdown>

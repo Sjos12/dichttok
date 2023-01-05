@@ -20,18 +20,11 @@ const props = defineProps({
                 >
                     Genres
                 </h1>
-                <!-- <div class="flex place-items-center gap-5">
-                    <input
-                        placeholder="Zoek een stijlmiddel"
-                        type="text"
-                        class="form-control"
-                    />
-                    <SecondaryButton>Zoeken</SecondaryButton>
-                </div> -->
             </div>
         </template>
 
         <div class="md:max-w-6xl mx-auto py-12">
+    
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 gap-y-0">
                 <Link
                     v-for="genre of genres"
