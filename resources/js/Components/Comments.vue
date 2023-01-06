@@ -35,10 +35,7 @@ function sendLike(commentArg) {
 </script>
 <template>
     <div class="grid gap-y-5">
-        <div
-            @click.self="$emit('toggleModal')"
-            class="bg-gray-800 rounded-md h-2 w-12 mx-auto mb-10 mt-2"
-        ></div>
+     
         <div class="flex justify-between">
             <h1 class="text-gray-200 text-xl font-medium">Comments</h1>
         </div>

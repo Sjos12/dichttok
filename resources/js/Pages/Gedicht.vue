@@ -93,21 +93,29 @@ function chooseAnalyse(analyse) {
 }
 </script>
 <template>
-    <div
-        ref="gedichtElement"
-        class="relative mx-auto h-[calc(100vh-14rem)] max-w-xl"
-    >
-        <div class="card mx-auto h-full flex w-full flex-col gap-y-5">
+    <div ref="gedichtElement" class="mx-auto h-[calc(100vh-6rem)] max-w-xl">
+        <div
+            class="
+                card
+                bg-transparent
+                mx-auto
+                h-full
+                gap-y-4
+                flex
+                w-full
+                flex-col
+            "
+        >
             <div class="flex w-full justify-between items-center">
-                <InputLabelVue>
+                <InputLabelVue class="font-normal">
                     {{ props.gedicht.user.name }}
                 </InputLabelVue>
-                <InputLabelVue>
+                <InputLabelVue class="font-light">
                     {{ createdAt }}
                 </InputLabelVue>
             </div>
             <div class="flex h-full gap-3">
-                <div class="flex flex-col gap-y-5 w-full overflow-x-auto">
+                <div class="flex flex-col gap-y- w-full overflow-x-auto">
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
                     </h1>
@@ -141,7 +149,6 @@ function chooseAnalyse(analyse) {
                         flex flex-col
                         gap-y-5
                         mt-auto
-                        my-10
                         grow-0
                         shrink
                     "
@@ -191,9 +198,9 @@ function chooseAnalyse(analyse) {
                     card
                     text-white
                     absolute
-                    bg-gray-900
+                    bg-gray-800
+                    rounded-t-lg
                     left-0
-                    overflow-y-auto
                     right-0
                     w-full
                     duration-150
@@ -201,6 +208,14 @@ function chooseAnalyse(analyse) {
                 "
                 :class="modalOpen ? 'bottom-0 top-36' : ' -bottom-36 top-full'"
             >
+                <div
+                    @click.self="toggleModal()"
+                    class="bg-transparent w-full pb-10 pt-2"
+                >
+                    <div
+                        class="bg-gray-700 rounded-full h-2 w-12 mx-auto"
+                    ></div>
+                </div>
                 <Analyses
                     v-if="modalState == 'analyses'"
                     @toggle-modal="toggleModal()"

@@ -8,10 +8,10 @@ const emits = defineEmits(["toggleModal", "chooseAnalyse"]);
 </script>
 <template>
     <div class="grid">
-        <div
+        <!-- <div
             @click.self="$emit('toggleModal')"
-            class="bg-gray-800 rounded-md h-2 w-12 mx-auto mb-10 mt-2"
-        ></div>
+            class="bg-gray-700 rounded-md h-2 w-12 mx-auto mb-10 mt-2"
+        ></div> -->
         <div class="flex justify-between">
             <h1 class="text-gray-200 text-xl font-medium">Analyses</h1>
             <Link :href="$route('gedicht.analyze.index', props.gedicht.uuid)">

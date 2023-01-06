@@ -80,15 +80,17 @@ function gedichtMaken() {
                 </div>
             </template>
 
-            <div class="container py-12">
+            <div class="container relative bg-gray-900 py-12">
                 <template v-if="props.gedichten.length > 0">
                     <GedichtVue
                         class="snap-start"
                         v-for="gedicht in props.gedichten"
                         v-bind:key="gedicht.id"
                         :gedicht="gedicht"
-                    ></GedichtVue
-                ></template>
+                    ></GedichtVue>
+                    <hr class="" />
+                    ></template
+                >
 
                 <div class="text-white flex self-center m-auto" v-else>
                     <h1 class="m-auto">
