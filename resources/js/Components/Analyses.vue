@@ -27,7 +27,6 @@ const emits = defineEmits(["toggleModal", "chooseAnalyse"]);
                 class="card flex justify-between w-full bg-gray-700"
             >
                 {{ analyse.user.name }}
-                <i class="fa fa-heart fa-md my-auto"></i>
             </button>
         </template>
         <span class="m-auto" v-else> No analyses yet </span>

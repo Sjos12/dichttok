@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\AnalyseController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GedichtController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StijlmiddelController;
+use App\Models\Comment;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,6 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/{query}', [SearchController::class, 'search'])->name('search');
 
     Route::get('/search/genres/{query}', [SearchController::class, 'search_genres'])->name('search_genres');
+
+    Route::post('/gedicht/{gedicht:uuid}/comment', [CommentController::class, 'create'])->name('comment.create');
+
+    Route::post('/comment/like', [CommentController::class,  'like'])->name('comment.like');
     // Route::get('/genres', [GenreController::class, 'list'])->name('genres');
 
     // Route::get('/genre/{tag:uuid}', [GenreController::class, 'detail'])->name('genre.detail');

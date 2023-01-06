@@ -23,6 +23,8 @@ class FeedController extends Controller
                     'user',
                     'analyses.user',
                     'analyses.highlight_fragments.stijlmiddel',
+                    'comments.user',
+                    'comments.likes'
                     // 'analyses.stijlmiddel'
                 )->orderBy('created_at', 'DESC')->get(),
             'genres' => Tag::all(),

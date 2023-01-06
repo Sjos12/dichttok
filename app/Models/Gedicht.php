@@ -30,7 +30,7 @@ class Gedicht extends Model implements HasMedia
     }
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->morphMany(Like::class, 'likeable');
     }
 
     public function user()

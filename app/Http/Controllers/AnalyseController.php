@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Analysis;
 use App\Models\Gedicht;
 use App\Models\HighlightFragment;
+use App\Models\Like;
 use App\Models\Stijlmiddel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,4 +52,22 @@ class AnalyseController extends Controller
         ]);
     }
     //
+
+    public function like(Analysis $analysis)
+    {
+        // TODO: Check if gedicht should be available to user...
+        $oldLike = $analysis->likes()
+            ->where('user_id', Auth::user()->id);
+
+        if ($oldLike->exists()) {
+            $oldLike->delete();
+        } else {
+            $like = new Like();
+            $like->user_id = Auth::user()->id;
+            $like->likeable_id = $analysis->id;
+            $like->likeable_type = Analysis::class;
+            $like->save();
+        }
+        return redirect()->back();
+    }
 }

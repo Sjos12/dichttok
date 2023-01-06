@@ -56,7 +56,8 @@ class GedichtController extends Controller
         } else {
             $like = new Like();
             $like->user_id = Auth::user()->id;
-            $like->gedicht_id = $gedicht->id;
+            $like->likeable_id = $gedicht->id;
+            $like->likeable_type = Gedicht::class;
             $like->save();
         }
         return redirect()->back();

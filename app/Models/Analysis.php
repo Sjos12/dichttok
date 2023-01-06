@@ -22,4 +22,9 @@ class Analysis extends Model
     {
         return $this->hasMany(HighlightFragment::class, 'analysis_id');
     }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
 }

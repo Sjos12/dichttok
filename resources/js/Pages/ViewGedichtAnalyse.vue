@@ -95,7 +95,9 @@ function hideInformationBox() {
                 <!-- {{ activeHoverFragment.id }} -->
             </button>
         </div>
-
+        <!-- <button @click.self="likeAnalysis">
+            <i class="fa fa-heart fa-lg my-auto"></i>
+        </button> -->
         <p
             class="
                 text-gray-100

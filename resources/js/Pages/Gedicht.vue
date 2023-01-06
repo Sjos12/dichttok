@@ -206,8 +206,9 @@ function chooseAnalyse(analyse) {
                 />
                 <template v-else>
                     <Comments
+                        :gedicht="props.gedicht"
+                        :comments="props.gedicht.comments"
                         @toggle-modal="toggleModal()"
-                        :gedicht="props.comments"
                 /></template>
             </div>
         </div>
