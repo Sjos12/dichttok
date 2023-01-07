@@ -26,14 +26,7 @@ function gedichtMaken() {
         <AuthenticatedLayout>
             <template #header>
                 <div
-                    class="
-                        flex
-                        sticky
-                        top-0
-                        snap-start
-                        justify-between
-                        items-center
-                    "
+                    class="flex top-0 snap-center justify-between items-center"
                 >
                     <div class="flex flex-col w-full gap-y-2">
                         <h2
