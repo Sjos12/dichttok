@@ -19,6 +19,7 @@ function submitComment() {
             preserveScroll: true,
         }
     );
+    comment.value = "";
 }
 function sendLike(commentArg) {
     console.log(commentArg);
@@ -35,7 +36,6 @@ function sendLike(commentArg) {
 </script>
 <template>
     <div class="grid gap-y-5">
-     
         <div class="flex justify-between">
             <h1 class="text-gray-200 text-xl font-medium">Comments</h1>
         </div>

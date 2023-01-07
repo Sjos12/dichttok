@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="snap-y snap-mandatory scroll-pt-20 " lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="snap-y snap-proximity scroll-pt-20 " lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-gray-900">
     @inertia
 
 </body>

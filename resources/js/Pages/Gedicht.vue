@@ -98,6 +98,7 @@ function chooseAnalyse(analyse) {
             class="
                 card
                 bg-transparent
+                md:bg-gray-800
                 mx-auto
                 h-full
                 gap-y-4
@@ -199,6 +200,7 @@ function chooseAnalyse(analyse) {
                     text-white
                     absolute
                     bg-gray-800
+                    md:bg-gray-900
                     rounded-t-lg
                     left-0
                     right-0

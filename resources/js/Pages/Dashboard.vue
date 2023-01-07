@@ -24,8 +24,17 @@ function gedichtMaken() {
         <Head title="Dashboard" />
 
         <AuthenticatedLayout>
-            <template class="flex" #header>
-                <div class="flex justify-between items-center">
+            <template #header>
+                <div
+                    class="
+                        flex
+                        sticky
+                        top-0
+                        snap-start
+                        justify-between
+                        items-center
+                    "
+                >
                     <div class="flex flex-col w-full gap-y-2">
                         <h2
                             class="
@@ -80,7 +89,7 @@ function gedichtMaken() {
                 </div>
             </template>
 
-            <div class="container relative bg-gray-900 py-12">
+            <div class="container mx-auto relative bg-gray-900 py-12">
                 <template v-if="props.gedichten.length > 0">
                     <GedichtVue
                         class="snap-start"
@@ -88,7 +97,7 @@ function gedichtMaken() {
                         v-bind:key="gedicht.id"
                         :gedicht="gedicht"
                     ></GedichtVue>
-                    <hr class="" />
+
                     ></template
                 >
 

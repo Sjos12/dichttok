@@ -7,6 +7,7 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import MainSearch from "@/Components/MainSearch.vue";
+import container from "@/Layouts/Container.vue";
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -25,8 +26,7 @@ const showingNavigationDropdown = ref(false);
                     dark:border-gray-700
                 "
             >
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <container>
                     <div class="flex relative justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
@@ -200,7 +200,7 @@ const showingNavigationDropdown = ref(false);
                             </button>
                         </div>
                     </div>
-                </div>
+                </container>
 
                 <!-- Responsive Navigation Menu -->
                 <div
@@ -216,6 +216,12 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('stijlmiddelen')"
+                            :active="route().current('stijlmiddelen')"
+                        >
+                            Stijlmiddelen
                         </ResponsiveNavLink>
                     </div>
 
