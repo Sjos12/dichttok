@@ -17,9 +17,11 @@ class FeedController extends Controller
             'gedichten' => Gedicht::withCount(
                 'likes',
                 'comments',
-                'analyses'
+                'analyses',
+
             )
                 ->with(
+                    'tags',
                     'user',
                     'analyses.user',
                     'analyses.highlight_fragments.stijlmiddel',

@@ -82,7 +82,7 @@ function gedichtMaken() {
                 </div>
             </template>
 
-            <div class="container mx-auto relative bg-gray-900 py-12">
+            <div class="container mx-auto relative bg-gray-900">
                 <template v-if="props.gedichten.length > 0">
                     <GedichtVue
                         class="snap-start"

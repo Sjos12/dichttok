@@ -46,6 +46,13 @@ function gedichtDoorMijzelf() {
     gedichtForm.zelfGeschreven = true;
     gedichtForm.auteur = props.auth.user.name;
 }
+
+function nextStep() {
+    if (activeStep.value + 1 <= totalSteps.value) activeStep.value++;
+}
+function prevStep() {
+    if (activeStep.value - 1 >= 0) activeStep.value--;
+}
 </script>
 <template>
     <AuthenticatedLayoutVue>
@@ -63,8 +70,11 @@ function gedichtDoorMijzelf() {
                 </h2>
             </div>
         </template>
-        <div class="card mx-auto">
-            <div class="mb-5 shadow-md flex bg-gray-900 rounded-full h-5 p-0">
+        <div class="card min-h-max !overflow-visible mx-auto">
+            <div
+                @click="activeStep = 1"
+                class="mb-5 shadow-md flex bg-gray-900 rounded-full h-5 p-0"
+            >
                 <span
                     class="
                         rounded-full
@@ -86,31 +96,30 @@ function gedichtDoorMijzelf() {
                 v-if="activeStep == 1"
                 v-model:titel="gedichtForm.titel"
                 v-model:gedicht="gedichtForm.gedicht"
+                @nextStep="nextStep"
+            />
+            <GedichtRecordingVue
+                v-else-if="activeStep == 2"
+                v-model:recording="gedichtForm.recording"
+                @nextStep="nextStep"
+                @prevStep="prevStep"
             />
             <GedichtContextVue
-                v-else-if="activeStep == 2"
+                v-else-if="activeStep == 3"
                 :genres="props.genres"
                 v-model:genre="gedichtForm.genre"
                 v-model:auteur="gedichtForm.auteur"
                 v-model:context="gedichtForm.context"
+                @submit="gedichtMaken"
+                @prevStep="prevStep"
             />
-
-            <GedichtRecordingVue
-                v-else-if="activeStep == 3"
-                v-model:recording="gedichtForm.recording"
-            />
-        </div>
-        <div class="card gap-y-5 mx-auto flex flex-col justify-center">
-            <PrimaryButtonVue
+            <!-- <PrimaryButtonVue
                 v-if="activeStep == totalSteps"
                 class="mx-auto"
                 type="button"
                 @click="gedichtMaken"
                 >Gedicht opslaan</PrimaryButtonVue
-            >
-            <PrimaryButtonVue @click="activeStep++" v-else>
-                Next
-            </PrimaryButtonVue>
+            > -->
         </div>
     </AuthenticatedLayoutVue>
 </template>

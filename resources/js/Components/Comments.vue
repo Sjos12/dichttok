@@ -74,7 +74,7 @@ function sendLike(commentArg) {
                         @click="sendLike(comment)"
                     >
                         <i
-                            :class="likedGedicht ? 'text-red-500' : ''"
+                            :class="false ? 'text-red-500' : ''"
                             class="fa fa-heart fa-lg"
                         ></i>
 

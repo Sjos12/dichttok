@@ -12,6 +12,7 @@ function startRecording() {
     if (!mediaRecorder) {
         getUserMedia();
     }
+    initMediaRecorder();
 }
 
 function initMediaRecorder() {
@@ -42,6 +43,7 @@ function mediaRecorderStopped() {
     chunks = [];
     const audioURL = window.URL.createObjectURL(blob);
     emit("sound_file", blob);
+
     audio.value = audioURL;
 }
 function getUserMedia() {
@@ -74,18 +76,24 @@ function getUserMedia() {
 </script>
 
 <template>
-    <div class="flex">
+    <div class="flex flex-col gap-y-5">
         <audio controls :src="audio"></audio>
         <PrimaryButtonVue
-            class="ml-auto"
+            class="ml-auto w-full"
             @click="startRecording"
             v-if="!isRecording"
-            >Opnemen</PrimaryButtonVue
+            >{{ audio ? "Opnieuw opnemen" : "Opnemen" }}</PrimaryButtonVue
         >
+
         <template class="ml-auto" v-if="isRecording">
-            <SecondaryButtonVue @click="stopRecording"
-                >Stoppen</SecondaryButtonVue
-            >
+            <SecondaryButtonVue
+                class="flex justify-between"
+                @click="stopRecording"
+                >Stoppen
+                <i
+                    class="fa fa-circle text-red-500 duration-75 animate-pulse"
+                ></i
+            ></SecondaryButtonVue>
         </template>
     </div>
 </template>

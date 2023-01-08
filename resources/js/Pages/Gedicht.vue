@@ -70,6 +70,8 @@ function stopPlayingAudio() {
     audio.pause();
     audio.currentTime = 0;
 }
+
+// const genre = computed(() => {});
 function analyzeGedicht() {
     let url = route("gedicht.analyze.index", props.gedicht.uuid);
     Inertia.get(url);
@@ -143,6 +145,23 @@ function chooseAnalyse(analyse) {
                     <span class="mt-10 text-gray-300">
                         {{ "- " + props.gedicht.auteur }}
                     </span>
+                    <!-- <div
+                        class="
+                            rounded-full
+                            justify-center
+                            items-center
+                            px-4
+                            py-1
+                            flex
+                            gap-3
+                            color-white
+                        "
+                        :style="{ backgroundColor: genre.color }"
+                    >
+                        <h2 class="text-white">
+                            {{ genre.name }}
+                        </h2>
+                    </div> -->
                 </div>
                 <div
                     class="
