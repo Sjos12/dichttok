@@ -120,7 +120,14 @@ const showingNavigationDropdown = ref(false);
                                         <DropdownLink
                                             :href="route('profile.edit')"
                                         >
+                                            <i class="fa fa-user"></i>
                                             Profile
+                                        </DropdownLink>
+                                        <DropdownLink
+                                            :href="route('gedicht.liked')"
+                                        >
+                                            <i class="fa fa-heart"></i>
+                                            Gedichten
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"

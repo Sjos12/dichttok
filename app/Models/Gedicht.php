@@ -24,6 +24,7 @@ class Gedicht extends Model implements HasMedia
         'context',
 
     ];
+    protected $with = ['tags', 'comments', 'likes', 'analyses', 'user'];
     public function highlight_fragments()
     {
         return $this->hasManyThrough(HighlightFragment::class, Analysis::class);

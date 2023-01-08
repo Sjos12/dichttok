@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/gedicht/create', [GedichtController::class, 'create'])->name('gedicht.create');
     Route::get('/gedicht/create', [GedichtController::class, 'create_index'])->name('gedicht.create.index');
 
+    Route::get('/gedicht/{gedicht:uuid}', [GedichtController::class, 'single'])->name('gedicht.single');
     Route::post('/gedicht/{gedicht:uuid}/like', [GedichtController::class, 'like'])->name('gedicht.like');
 
     Route::get('/gedicht/{gedicht:uuid}/analyze', [AnalyseController::class, 'index'])->name('gedicht.analyze.index');
@@ -60,6 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/gedicht/{gedicht:uuid}/comment', [CommentController::class, 'create'])->name('comment.create');
 
     Route::post('/comment/like', [CommentController::class,  'like'])->name('comment.like');
+
+    Route::get('/gedichten/liked', [GedichtController::class, 'liked'])->name('gedicht.liked');
     // Route::get('/genres', [GenreController::class, 'list'])->name('genres');
 
     // Route::get('/genre/{tag:uuid}', [GenreController::class, 'detail'])->name('genre.detail');

@@ -22,7 +22,19 @@ class GedichtController extends Controller
         ]);
     }
     //
+    public function liked()
+    {
 
+        return Inertia::render('LikedGedichten', [
+            'gedichten' =>         Auth::user()->gedichten,
+        ]);
+    }
+    public function single(Gedicht $gedicht)
+    {
+        return Inertia::render('SingleGedicht', [
+            'gedicht' => $gedicht,
+        ]);
+    }
     public function create(Request $request)
     {
 
