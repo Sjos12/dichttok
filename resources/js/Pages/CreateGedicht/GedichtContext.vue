@@ -48,7 +48,7 @@ defineEmits(["update:auteur", "update:context", "update:genre"]);
         ></textarea>
     </div>
     <AddGenreVue
-        @genre_select="(genre) => $emit('update:genre', genre)"
+        @genre_select="(genre) => $emit('update:genre', genre.id)"
         :genres="props.genres"
     />
 </template>

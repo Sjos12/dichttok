@@ -33,6 +33,7 @@ class GedichtController extends Controller
             'auteur' => 'required',
             'context' => 'nullable',
             'voiceover' => 'nullable',
+            'genre' => 'integer|nullable'
         ]);
 
         $model = new Gedicht($validatedData);
@@ -42,6 +43,9 @@ class GedichtController extends Controller
             $model->addMedia($validatedData['voiceover'])->toMediaCollection(('audio'));
         }
 
+        if (array_key_exists('genre', $validatedData['genre'])) {
+            $model->tags()->associate(Tag::find($validatedData['genre']));
+        }
         return redirect()->route('dashboard');
     }
 
