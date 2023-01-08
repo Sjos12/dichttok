@@ -11,8 +11,9 @@ const props = defineProps({
     gedichten: Array,
     genres: Array,
     genre: Object,
+    nextUrl: String,
 });
-console.log(props.gedichten);
+
 function gedichtMaken() {
     let url = route("gedicht.create.index");
     Inertia.visit(url);
@@ -86,13 +87,11 @@ function gedichtMaken() {
                 <template v-if="props.gedichten.length > 0">
                     <GedichtVue
                         class="snap-start"
-                        v-for="gedicht in props.gedichten"
+                        v-for="(gedicht, idx) of props.gedichten"
                         v-bind:key="gedicht.id"
                         :gedicht="gedicht"
                     ></GedichtVue>
-
-                    ></template
-                >
+                </template>
 
                 <div class="text-white flex self-center m-auto" v-else>
                     <h1 class="m-auto">

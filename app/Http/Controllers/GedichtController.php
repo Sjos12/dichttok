@@ -24,9 +24,15 @@ class GedichtController extends Controller
     //
     public function liked()
     {
+        $likes =  Like::where(['user_id' => Auth::user()->id, 'likeable_type' => Gedicht::class])->with('likeable')->orderBy('created_at', 'DESC')->get();;
+
+
+        $gedichten = $likes->map(function ($like) {
+            return $like->likeable;
+        });
 
         return Inertia::render('LikedGedichten', [
-            'gedichten' =>         Auth::user()->gedichten,
+            'gedichten' =>         $gedichten
         ]);
     }
     public function single(Gedicht $gedicht)

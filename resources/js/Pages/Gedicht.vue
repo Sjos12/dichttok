@@ -11,6 +11,7 @@ import ViewGedichtAnalyse from "./ViewGedichtAnalyse.vue";
 
 const props = defineProps({
     gedicht: Object,
+    nextUrl: String,
 });
 
 const activeAnalyse = reactive({});
@@ -35,6 +36,10 @@ let audio = reactive(new Audio(props.gedicht.voiceover));
 audio.loop = true;
 
 onMounted(() => {
+    if (props.nextUrl) {
+        setupIntersectionObserver();
+    }
+
     if (!gedichtElement || !props.gedicht.voiceover) return false;
     let observer = new IntersectionObserver(
         ([entry]) => {
@@ -50,6 +55,8 @@ onMounted(() => {
 
     observer.observe(gedichtElement.value);
 });
+
+
 
 function sendLike() {
     let url = route("gedicht.like", props.gedicht.uuid);

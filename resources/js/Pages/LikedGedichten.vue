@@ -29,7 +29,13 @@ const props = defineProps({
                     v-for="gedicht of gedichten"
                     :key="gedicht.uuid"
                     :href="route('gedicht.single', gedicht.uuid)"
-                    class="card max-h-['100vh']"
+                    class="
+                        card
+                        max-h-['100vh']
+                        hover:shadow-xl
+                        duration-75
+                        ease-in-out
+                    "
                 >
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ gedicht.titel }}

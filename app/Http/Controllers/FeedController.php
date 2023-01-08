@@ -13,23 +13,25 @@ class FeedController extends Controller
 
     public function __invoke()
     {
-        return Inertia::render('Dashboard', [
-            'gedichten' => Gedicht::withCount(
-                'likes',
-                'comments',
-                'analyses',
+        $paginator = Gedicht::withCount(
+            'likes',
+            'comments',
+            'analyses',
+            'tags'
+        )
+            ->with(
+                'user',
+                'analyses.user',
+                'analyses.highlight_fragments.stijlmiddel',
+                'comments.user',
+                'comments.likes'
+                // 'analyses.stijlmiddel'
+            )->orderBy('created_at', 'DESC')->get();
 
-            )
-                ->with(
-                    'tags',
-                    'user',
-                    'analyses.user',
-                    'analyses.highlight_fragments.stijlmiddel',
-                    'comments.user',
-                    'comments.likes'
-                    // 'analyses.stijlmiddel'
-                )->orderBy('created_at', 'DESC')->get(),
+        return Inertia::render('Dashboard', [
+            'gedichten' => $paginator,
             'genres' => Tag::all(),
+            // 'nextUrl' => $paginator->nextPageUrl(),
         ]);
     }
 
