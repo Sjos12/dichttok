@@ -1,11 +1,17 @@
 <script setup>
 import InputLabel from "@/Components/InputLabel.vue";
+import { reactive } from "@vue/reactivity";
 import Dropdown from "./Dropdown.vue";
 const props = defineProps({
     genres: Array,
 });
 
-defineEmits(["genre_select"]);
+const emit = defineEmits(["genre_select"]);
+const activeGenre = reactive(props.genres[0]);
+function selectGenre(genre) {
+    Object.assign(activeGenre, genre);
+    emit("genre_select", genre);
+}
 </script>
 <template>
     <div class="grid gap-y-3">
@@ -13,31 +19,39 @@ defineEmits(["genre_select"]);
         <div class="w-full">
             <Dropdown align="right" width="96">
                 <template #trigger>
-                    <span class="inline-flex rounded-md">
+                    <span class="inline-flex w-full rounded-md">
                         <button
                             type="button"
                             class="
-                                inline-flex
-                                items-center
-                                px-3
-                                py-2
-                                border border-transparent
-                                text-sm
-                                leading-4
-                                font-medium
-                                rounded-md
-                                text-gray-500
-                                bg-white
-                                dark:bg-gray-800
-                                hover:text-gray-700
-                                dark:hover:text-gray-300
-                                focus:outline-none
                                 transition
                                 ease-in-out
                                 duration-150
+                                text-white
+                                flex
+                                justify-between
+                                items-center
+                                form-control
+                                w-full
+                                p-3
                             "
                         >
-                            Genres
+                            <div
+                                class="
+                                    rounded-full
+                                    justify-center
+                                    items-center
+                                    px-4
+                                    py-1
+                                    flex
+                                    gap-3
+                                    color-white
+                                "
+                                :style="{ backgroundColor: activeGenre.color }"
+                            >
+                                <h2 class="text-white">
+                                    {{ activeGenre.name }}
+                                </h2>
+                            </div>
 
                             <svg
                                 class="ml-2 -mr-0.5 h-4 w-4"
@@ -60,7 +74,7 @@ defineEmits(["genre_select"]);
                         <Link
                             v-for="genre of props.genres"
                             :key="genre.uuid"
-                            @click="$emit('genre_select', genre)"
+                            @click="selectGenre(genre)"
                             class="
                                 rounded-full
                                 justify-center
