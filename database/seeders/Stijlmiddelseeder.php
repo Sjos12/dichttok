@@ -15,52 +15,21 @@ class Stijlmiddelseeder extends Seeder
      */
     public function run()
     {
-        $stijlmiddelen = [
-            [
-                'name' => 'Enjambement',
-                'color' => '#7209b7'
-            ],
-            [
-                'name' => 'Personificatie',
-                'color' => '#f72585',
-            ],
-            [
-                'name' => 'Anticlimax',
-                'color' => '#03045e',
-            ],
-            [
-                'name' => 'Alliteratie',
-                'color' => '#3a0ca3',
-            ],
-            [
-                'name' => 'Assonantie',
-                'color' => '#4361ee',
-            ],
-            [
-                'name' => 'Eufemisme',
-                'color' => '#ff5400',
-            ],
-            [
-                'name' => 'Hyperbool',
-                'color' => '#f72585',
-            ],
-            [
-                'name' => 'Metafoor',
-                'color' => '#014f86',
-            ],
-            [
-                'name' => 'Pleonasme',
-                'color' => '#bf0603',
-            ],
-            [
-                'name' => 'Tautologie',
-                'color' => '#8ac926',
-            ],
-            [
-                'name' => 'Oxymoron',
-                'color' => '#006400',
-            ]
-        ];
+        $stijlmiddelen = [];
+        $row = 1;
+        if (($handle = fopen('stijlmiddelen.csv', "r", true)) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $num = count($data);
+                $row++;
+                if ($data[0] == '' || $data[1] == '' || $data[2] == '') continue;
+                $stijlmiddelen[] = [
+                    'name' => $data[0],
+                    'description' => $data[1],
+                    'color' => $data[2],
+                ];
+            }
+            fclose($handle);
+        }
 
         foreach ($stijlmiddelen as $stijlmiddel) {
             Stijlmiddel::create($stijlmiddel);
