@@ -51,8 +51,7 @@ defineEmits(["update:auteur", "update:context", "update:genre", "prevStep"]);
             ></textarea>
         </div>
         <AddGenreVue
-            class=""
-            @genre_select="(genre) => $emit('update:genre', genre)"
+            @genre_select="(genre) => $emit('update:genre', genre.id)"
             :genres="props.genres"
         />
     </div>
@@ -63,8 +62,4 @@ defineEmits(["update:auteur", "update:context", "update:genre", "prevStep"]);
             >Gedicht opslaan</PrimaryButtonVue
         >
     </div>
-    <AddGenreVue
-        @genre_select="(genre) => $emit('update:genre', genre.id)"
-        :genres="props.genres"
-    />
 </template>

@@ -18,24 +18,17 @@ const analyseIsOpen = ref(false);
 let createdAt = computed(() => {
     return DateTime.fromISO(props.gedicht.created_at).toRelative();
 });
+let genre = computed(() => {
+    return props.gedicht.tags[0];
+});
 const gedichtElement = ref(null);
-function sendLike() {
-    let url = route("gedicht.like", props.gedicht.uuid);
-    Inertia.post(
-        url,
-        {},
-        {
-            preserveState: true,
-            preserveScroll: true,
-        }
-    );
-}
 
 let modalOpen = ref(false);
 let modalState = ref("comments");
 const likedGedicht = computed(() => {
     return props.gedicht.is_liked;
 });
+
 const gedicht = ref(props.gedicht.gedicht);
 const shouldPlayAudio = ref(false);
 let audio = reactive(new Audio(props.gedicht.voiceover));
@@ -58,6 +51,17 @@ onMounted(() => {
     observer.observe(gedichtElement.value);
 });
 
+function sendLike() {
+    let url = route("gedicht.like", props.gedicht.uuid);
+    Inertia.post(
+        url,
+        {},
+        {
+            preserveState: true,
+            preserveScroll: true,
+        }
+    );
+}
 function playAudio() {
     shouldPlayAudio.value = true;
     console.log("play audio", props.gedicht.titel);
@@ -71,7 +75,6 @@ function stopPlayingAudio() {
     audio.currentTime = 0;
 }
 
-// const genre = computed(() => {});
 function analyzeGedicht() {
     let url = route("gedicht.analyze.index", props.gedicht.uuid);
     Inertia.get(url);
@@ -117,8 +120,8 @@ function chooseAnalyse(analyse) {
                     {{ createdAt }}
                 </InputLabelVue>
             </div>
-            <div class="flex h-full gap-3">
-                <div class="flex flex-col gap-y- w-full overflow-x-auto">
+            <div class="flex h-full gap-3 max-h-full">
+                <div class="flex flex-col gap-y- w-full overflow-y-auto">
                     <h1 class="text-gray-200 text-xl font-medium">
                         {{ props.gedicht.titel }}
                     </h1>
@@ -126,6 +129,7 @@ function chooseAnalyse(analyse) {
                     <p
                         v-if="!analyseIsOpen"
                         class="
+                            overflow-y-auto
                             whitespace-pre-wrap
                             text-gray-100
                             mt-5
@@ -138,33 +142,40 @@ function chooseAnalyse(analyse) {
                     </p>
                     <template v-if="analyseIsOpen && activeAnalyse">
                         <ViewGedichtAnalyse
+                            class="overflow-y-auto"
                             :gedicht="props.gedicht"
                             :analysis="activeAnalyse"
                         />
                     </template>
-                    <span class="mt-10 text-gray-300">
-                        {{ "- " + props.gedicht.auteur }}
-                    </span>
-                    <!-- <div
-                        class="
-                            rounded-full
-                            justify-center
-                            items-center
-                            px-4
-                            py-1
-                            flex
-                            gap-3
-                            color-white
-                        "
-                        :style="{ backgroundColor: genre.color }"
-                    >
-                        <h2 class="text-white">
-                            {{ genre.name }}
-                        </h2>
-                    </div> -->
+                    <div class="flex justify-between">
+                        <span class="mt-5 text-gray-300">
+                            {{ "- " + props.gedicht.auteur }}
+                        </span>
+                        <div
+                            v-if="props.gedicht.tags[0]"
+                            class="
+                                rounded-full
+                                justify-center
+                                items-center
+                                px-4
+                                py-1
+                                flex
+                                gap-3
+                                mt-auto
+                                ml-auto
+                                text-xs text-white
+                            "
+                            :style="{
+                                backgroundColor: props.gedicht.tags[0].color,
+                            }"
+                        >
+                            {{ props.gedicht.tags[0].name }}
+                        </div>
+                    </div>
                 </div>
                 <div
                     class="
+                        max-h-full
                         text-white
                         flex flex-col
                         gap-y-5
@@ -173,7 +184,10 @@ function chooseAnalyse(analyse) {
                         shrink
                     "
                 >
-                    <button class="flex flex-col gap-y-5" @click="sendLike">
+                    <button
+                        class="flex flex-col mt-5 gap-y-5"
+                        @click="sendLike"
+                    >
                         <i
                             :class="likedGedicht ? 'text-red-500' : ''"
                             class="fa fa-heart fa-2xl"
@@ -188,7 +202,6 @@ function chooseAnalyse(analyse) {
                         @click="openComments"
                     >
                         <i class="fa fa-comments fa-xl"></i>
-                        <!-- <span>{{ 1 }}</span> -->
                     </button>
 
                     <button
@@ -196,8 +209,6 @@ function chooseAnalyse(analyse) {
                         @click="openAnalyses"
                     >
                         <i class="fa fa-magnifying-glass-chart fa-xl"></i>
-
-                        <!-- <span>{{ props.gedicht.analyses.length }}</span> -->
                     </button>
                 </div>
             </div>
@@ -243,12 +254,13 @@ function chooseAnalyse(analyse) {
                     @choose-analyse="chooseAnalyse"
                     :gedicht="props.gedicht"
                 />
-                <template v-else>
-                    <Comments
-                        :gedicht="props.gedicht"
-                        :comments="props.gedicht.comments"
-                        @toggle-modal="toggleModal()"
-                /></template>
+
+                <Comments
+                    v-else
+                    :gedicht="props.gedicht"
+                    :comments="props.gedicht.comments"
+                    @toggle-modal="toggleModal()"
+                />
             </div>
         </div>
     </div>

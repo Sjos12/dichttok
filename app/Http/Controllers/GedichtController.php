@@ -43,8 +43,8 @@ class GedichtController extends Controller
             $model->addMedia($validatedData['voiceover'])->toMediaCollection(('audio'));
         }
 
-        if (array_key_exists('genre', $validatedData['genre'])) {
-            $model->tags()->associate(Tag::find($validatedData['genre']));
+        if (array_key_exists('genre', $validatedData)) {
+            $model->tags()->attach(Tag::find($validatedData['genre']));
         }
         return redirect()->route('dashboard');
     }
