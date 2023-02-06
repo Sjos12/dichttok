@@ -15,9 +15,9 @@ defineProps({
             items-center
             px-4
             py-2
-            bg-white
-            dark:bg-gray-800
-            border border-indigo-500
+            bg-transparent
+
+            border-2 border-indigo-500
             rounded-md
             font-semibold
             text-xs text-gray-700

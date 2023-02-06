@@ -4,8 +4,9 @@ import { Link } from "@inertiajs/inertia-vue3";
 </script>
 
 <template>
-    <div
+    <nav
         class="
+        z-50
             min-h-screen
             pt-6
             sm:pt-0
@@ -19,7 +20,7 @@ import { Link } from "@inertiajs/inertia-vue3";
             <div>
                 <Link href="/">
                     <ApplicationLogo
-                        class="w-20 h-20 fill-current text-gray-500"
+                        class=" h-20 fill-current text-gray-500"
                     />
                 </Link>
             </div>
@@ -41,5 +42,5 @@ import { Link } from "@inertiajs/inertia-vue3";
                 <slot />
             </div>
         </div>
-    </div>
+    </nav>
 </template>

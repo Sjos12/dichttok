@@ -23,8 +23,12 @@ defineProps({
             text-xs text-white
             uppercase
             tracking-widest
-            hover:bg-gray-700
-            dark:hover:bg-white
+            hover:bg-indigo-400
+            duration-300
+
+            ease-in-out
+            transition-all
+            hover:shadow-lg
             focus:bg-gray-700
             dark:focus:bg-white
             active:bg-gray-900

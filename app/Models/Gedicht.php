@@ -17,6 +17,7 @@ class Gedicht extends Model implements HasMedia
 
     protected $table = 'gedichten';
     protected $appends = ['is_liked', 'is_analysed', 'voiceover'];
+
     protected $fillable = [
         'titel',
         'gedicht',

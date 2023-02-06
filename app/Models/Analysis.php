@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Analysis extends Model
 {
+    protected  $with = [
+        'highlight_fragments'
+    ];
     use HasFactory, GeneratesUuid;
     public function user()
     {

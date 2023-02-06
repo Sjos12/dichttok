@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalyseController;
-use App\Http\Controllers\AnalysisController;
+//use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GedichtController;
@@ -10,6 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StijlmiddelController;
 use App\Models\Comment;
+use App\Models\Gedicht;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,7 +29,15 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home', []);
+    $mostPopularGedichten = Gedicht::withCount('likes')->orderByDesc('likes_count')->limit(5)->get();
+
+    return Inertia::render('Home/Home', [
+        'gedichten' => $mostPopularGedichten,
+        'genres' => Tag::all(),
+        'gedichten_total' => Gedicht::count(),
+        'user_total' => User::count(),
+        'analysis_gedicht' => Gedicht::withCount('likes', 'analyses')->orderByDesc('likes_count')->first()
+    ]);
 });
 
 Route::get('/dashboard', FeedController::class)->middleware(['auth', 'verified'])->name('dashboard');
