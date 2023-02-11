@@ -1,6 +1,6 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.185df2b5.js",
+    "file": "assets/app.0007a6e5.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -18,7 +18,8 @@
       "resources/js/Pages/Dashboard.vue",
       "resources/js/Pages/Gedicht.vue",
       "resources/js/Pages/Genres.vue",
-      "resources/js/Pages/Home.vue",
+      "resources/js/Pages/Home/Home.vue",
+      "resources/js/Pages/Home/MockGedicht.vue",
       "resources/js/Pages/LikedGedichten.vue",
       "resources/js/Pages/Profile/Edit.vue",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
@@ -30,50 +31,50 @@
       "resources/js/Pages/ViewGedichtAnalyse.vue"
     ],
     "css": [
-      "assets/app.5ee91ce4.css"
+      "assets/app.0b530c5b.css"
     ]
   },
   "resources/js/Pages/Auth/ConfirmPassword.vue": {
-    "file": "assets/ConfirmPassword.f3a4fc43.js",
+    "file": "assets/ConfirmPassword.063046d3.js",
     "src": "resources/js/Pages/Auth/ConfirmPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "_GuestLayout.10cb68e2.js": {
-    "file": "assets/GuestLayout.10cb68e2.js",
+  "_GuestLayout.b774d9f2.js": {
+    "file": "assets/GuestLayout.b774d9f2.js",
     "imports": [
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "resources/js/app.js"
     ]
   },
-  "_TextInput.9eea7d2c.js": {
-    "file": "assets/TextInput.9eea7d2c.js",
-    "imports": [
-      "resources/js/app.js"
-    ]
-  },
-  "_InputLabel.c6f2ae0b.js": {
-    "file": "assets/InputLabel.c6f2ae0b.js",
+  "_TextInput.9f321d5e.js": {
+    "file": "assets/TextInput.9f321d5e.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "_PrimaryButton.fa295825.js": {
-    "file": "assets/PrimaryButton.fa295825.js",
+  "_InputLabel.8dfe1ccd.js": {
+    "file": "assets/InputLabel.8dfe1ccd.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "_ApplicationLogo.48a7ae75.js": {
-    "file": "assets/ApplicationLogo.48a7ae75.js",
+  "_PrimaryButton.cd5a0ab1.js": {
+    "file": "assets/PrimaryButton.cd5a0ab1.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_ApplicationLogo.f77b4c69.js": {
+    "file": "assets/ApplicationLogo.f77b4c69.js",
     "imports": [
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
@@ -83,169 +84,169 @@
     "file": "assets/_plugin-vue_export-helper.cdc0426e.js"
   },
   "resources/js/Pages/Auth/ForgotPassword.vue": {
-    "file": "assets/ForgotPassword.4bbb89b8.js",
+    "file": "assets/ForgotPassword.1286466e.js",
     "src": "resources/js/Pages/Auth/ForgotPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Auth/Login.vue": {
-    "file": "assets/Login.cf9c5200.js",
+    "file": "assets/Login.058e14be.js",
     "src": "resources/js/Pages/Auth/Login.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Auth/Register.vue": {
-    "file": "assets/Register.3f8e2bbb.js",
+    "file": "assets/Register.8b779c67.js",
     "src": "resources/js/Pages/Auth/Register.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.vue": {
-    "file": "assets/ResetPassword.cf122c2e.js",
+    "file": "assets/ResetPassword.285198ab.js",
     "src": "resources/js/Pages/Auth/ResetPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Auth/VerifyEmail.vue": {
-    "file": "assets/VerifyEmail.2c3cad01.js",
+    "file": "assets/VerifyEmail.9601ca99.js",
     "src": "resources/js/Pages/Auth/VerifyEmail.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout.10cb68e2.js",
-      "_PrimaryButton.fa295825.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GuestLayout.b774d9f2.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/CreateGedicht/CreateGedicht.vue": {
-    "file": "assets/CreateGedicht.fbf4befd.js",
+    "file": "assets/CreateGedicht.bc2f62c0.js",
     "src": "resources/js/Pages/CreateGedicht/CreateGedicht.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/app.js",
       "resources/js/Pages/CreateGedicht/GedichtBasicDetails.vue",
       "resources/js/Pages/CreateGedicht/GedichtRecording.vue",
       "resources/js/Pages/CreateGedicht/GedichtContext.vue",
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
-      "_SecondaryButton.50ff261f.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_SecondaryButton.45423d5f.js"
     ]
   },
-  "_AuthenticatedLayout.7cd57917.js": {
-    "file": "assets/AuthenticatedLayout.7cd57917.js",
+  "_AuthenticatedLayout.25bdcf4c.js": {
+    "file": "assets/AuthenticatedLayout.25bdcf4c.js",
     "imports": [
-      "_ApplicationLogo.48a7ae75.js",
-      "_Dropdown.e3f68e29.js",
+      "_ApplicationLogo.f77b4c69.js",
+      "_Dropdown.a53e1b92.js",
       "resources/js/app.js",
-      "_Container.18a5d235.js"
+      "_Container.d3840509.js"
     ]
   },
   "resources/js/Pages/CreateGedicht/GedichtBasicDetails.vue": {
-    "file": "assets/GedichtBasicDetails.8bb768fb.js",
+    "file": "assets/GedichtBasicDetails.fc43b8d7.js",
     "src": "resources/js/Pages/CreateGedicht/GedichtBasicDetails.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js"
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js"
     ]
   },
   "resources/js/Pages/CreateGedicht/GedichtRecording.vue": {
-    "file": "assets/GedichtRecording.0ed13490.js",
+    "file": "assets/GedichtRecording.3115878a.js",
     "src": "resources/js/Pages/CreateGedicht/GedichtRecording.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.fa295825.js",
-      "_SecondaryButton.50ff261f.js"
+      "_PrimaryButton.cd5a0ab1.js",
+      "_SecondaryButton.45423d5f.js"
     ]
   },
   "resources/js/Pages/CreateGedicht/GedichtContext.vue": {
-    "file": "assets/GedichtContext.96da3c77.js",
+    "file": "assets/GedichtContext.d59c5a64.js",
     "src": "resources/js/Pages/CreateGedicht/GedichtContext.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_InputLabel.c6f2ae0b.js",
+      "_InputLabel.8dfe1ccd.js",
       "resources/js/app.js",
-      "_Dropdown.e3f68e29.js",
-      "_PrimaryButton.fa295825.js",
-      "_SecondaryButton.50ff261f.js"
+      "_Dropdown.a53e1b92.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_SecondaryButton.45423d5f.js"
     ]
   },
-  "_Dropdown.e3f68e29.js": {
-    "file": "assets/Dropdown.e3f68e29.js",
+  "_Dropdown.a53e1b92.js": {
+    "file": "assets/Dropdown.a53e1b92.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "_Container.18a5d235.js": {
-    "file": "assets/Container.18a5d235.js",
+  "_Container.d3840509.js": {
+    "file": "assets/Container.d3840509.js",
     "imports": [
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
     ]
   },
-  "_SecondaryButton.50ff261f.js": {
-    "file": "assets/SecondaryButton.50ff261f.js",
+  "_SecondaryButton.45423d5f.js": {
+    "file": "assets/SecondaryButton.45423d5f.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/CreateGedichtAnalyse.vue": {
-    "file": "assets/CreateGedichtAnalyse.29376fff.js",
+    "file": "assets/CreateGedichtAnalyse.5f31cefa.js",
     "src": "resources/js/Pages/CreateGedichtAnalyse.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_PrimaryButton.fa295825.js",
-      "_AuthenticatedLayout.7cd57917.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/app.js",
-      "_GedichtFragment.200b6172.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_GedichtFragment.e2d526e2.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js"
     ]
   },
-  "_GedichtFragment.200b6172.js": {
-    "file": "assets/GedichtFragment.200b6172.js",
+  "_GedichtFragment.e2d526e2.js": {
+    "file": "assets/GedichtFragment.e2d526e2.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper.cdc0426e.js"
@@ -255,190 +256,219 @@
     ]
   },
   "resources/js/Pages/Dashboard.vue": {
-    "file": "assets/Dashboard.1c7ce2df.js",
+    "file": "assets/Dashboard.f6f26ace.js",
     "src": "resources/js/Pages/Dashboard.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/app.js",
-      "_PrimaryButton.fa295825.js",
+      "_PrimaryButton.cd5a0ab1.js",
       "resources/js/Pages/Gedicht.vue",
-      "_Dropdown.e3f68e29.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_Dropdown.a53e1b92.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Container.18a5d235.js",
+      "_Container.d3840509.js",
+      "_datetime.5f24481b.js",
       "resources/js/Pages/ViewGedichtAnalyse.vue",
-      "_GedichtFragment.200b6172.js"
+      "_GedichtFragment.e2d526e2.js"
     ]
   },
   "resources/js/Pages/Gedicht.vue": {
-    "file": "assets/Gedicht.f9694976.js",
+    "file": "assets/Gedicht.b0edf40d.js",
     "src": "resources/js/Pages/Gedicht.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_datetime.5f24481b.js",
+      "_PrimaryButton.cd5a0ab1.js",
       "resources/js/Pages/ViewGedichtAnalyse.vue",
-      "_GedichtFragment.200b6172.js",
+      "_GedichtFragment.e2d526e2.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
+  "_datetime.5f24481b.js": {
+    "file": "assets/datetime.5f24481b.js"
+  },
   "resources/js/Pages/ViewGedichtAnalyse.vue": {
-    "file": "assets/ViewGedichtAnalyse.eb6130e4.js",
+    "file": "assets/ViewGedichtAnalyse.d5c86023.js",
     "src": "resources/js/Pages/ViewGedichtAnalyse.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GedichtFragment.200b6172.js",
+      "_GedichtFragment.e2d526e2.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Genres.vue": {
-    "file": "assets/Genres.9637a83c.js",
+    "file": "assets/Genres.5c841099.js",
     "src": "resources/js/Pages/Genres.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/app.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js"
     ]
   },
-  "resources/js/Pages/Home.vue": {
-    "file": "assets/Home.115b1d36.js",
-    "src": "resources/js/Pages/Home.vue",
+  "resources/js/Pages/Home/Home.vue": {
+    "file": "assets/Home.14259269.js",
+    "src": "resources/js/Pages/Home/Home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_ApplicationLogo.48a7ae75.js",
       "resources/js/app.js",
-      "_PrimaryButton.fa295825.js",
-      "_SecondaryButton.50ff261f.js",
-      "_Container.18a5d235.js",
+      "_ApplicationLogo.f77b4c69.js",
+      "_PrimaryButton.cd5a0ab1.js",
+      "_SecondaryButton.45423d5f.js",
+      "_Container.d3840509.js",
+      "resources/js/Pages/Home/MockGedicht.vue",
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_datetime.5f24481b.js",
+      "resources/js/Pages/ViewGedichtAnalyse.vue",
+      "_GedichtFragment.e2d526e2.js"
+    ],
+    "css": [
+      "assets/Home.b7f8de09.css"
+    ]
+  },
+  "resources/js/Pages/Home/MockGedicht.vue": {
+    "file": "assets/MockGedicht.459e4fd4.js",
+    "src": "resources/js/Pages/Home/MockGedicht.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_datetime.5f24481b.js",
+      "resources/js/Pages/ViewGedichtAnalyse.vue",
+      "_GedichtFragment.e2d526e2.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/LikedGedichten.vue": {
-    "file": "assets/LikedGedichten.ce7caada.js",
+    "file": "assets/LikedGedichten.bd8ac25b.js",
     "src": "resources/js/Pages/LikedGedichten.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
-      "_Container.18a5d235.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
+      "_Container.d3840509.js",
       "resources/js/app.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js"
+      "_Dropdown.a53e1b92.js"
     ]
   },
   "resources/js/Pages/Profile/Edit.vue": {
-    "file": "assets/Edit.d47ec888.js",
+    "file": "assets/Edit.9dc066fb.js",
     "src": "resources/js/Pages/Profile/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
       "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
       "resources/js/app.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_SecondaryButton.50ff261f.js",
-      "_PrimaryButton.fa295825.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js",
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_SecondaryButton.45423d5f.js",
+      "_PrimaryButton.cd5a0ab1.js"
     ]
   },
   "resources/js/Pages/Profile/Partials/DeleteUserForm.vue": {
-    "file": "assets/DeleteUserForm.8424c5be.js",
+    "file": "assets/DeleteUserForm.bc601a7a.js",
     "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_SecondaryButton.50ff261f.js"
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_SecondaryButton.45423d5f.js"
     ]
   },
   "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue": {
-    "file": "assets/UpdatePasswordForm.1847116c.js",
+    "file": "assets/UpdatePasswordForm.8ae368d4.js",
     "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js"
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js"
     ]
   },
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue": {
-    "file": "assets/UpdateProfileInformationForm.a44b4e37.js",
+    "file": "assets/UpdateProfileInformationForm.7e8d0c3c.js",
     "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_TextInput.9eea7d2c.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js"
+      "_TextInput.9f321d5e.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_PrimaryButton.cd5a0ab1.js"
     ]
   },
   "resources/js/Pages/SingleGedicht.vue": {
-    "file": "assets/SingleGedicht.1ca29595.js",
+    "file": "assets/SingleGedicht.4db2f47d.js",
     "src": "resources/js/Pages/SingleGedicht.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/Pages/Gedicht.vue",
-      "_AuthenticatedLayout.7cd57917.js",
-      "_Container.18a5d235.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
+      "_Container.d3840509.js",
       "resources/js/app.js",
-      "_InputLabel.c6f2ae0b.js",
-      "_PrimaryButton.fa295825.js",
+      "_InputLabel.8dfe1ccd.js",
+      "_datetime.5f24481b.js",
+      "_PrimaryButton.cd5a0ab1.js",
       "resources/js/Pages/ViewGedichtAnalyse.vue",
-      "_GedichtFragment.200b6172.js",
+      "_GedichtFragment.e2d526e2.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_ApplicationLogo.48a7ae75.js",
-      "_Dropdown.e3f68e29.js"
+      "_ApplicationLogo.f77b4c69.js",
+      "_Dropdown.a53e1b92.js"
     ]
   },
   "resources/js/Pages/Stijlmiddel.vue": {
-    "file": "assets/Stijlmiddel.5fbdda7c.js",
+    "file": "assets/Stijlmiddel.dfb7676d.js",
     "src": "resources/js/Pages/Stijlmiddel.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
-      "_InputLabel.c6f2ae0b.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
+      "_InputLabel.8dfe1ccd.js",
       "resources/js/app.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js"
     ]
   },
   "resources/js/Pages/Stijlmiddelen.vue": {
-    "file": "assets/Stijlmiddelen.e0d114b1.js",
+    "file": "assets/Stijlmiddelen.ac1cdeca.js",
     "src": "resources/js/Pages/Stijlmiddelen.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.7cd57917.js",
+      "_AuthenticatedLayout.25bdcf4c.js",
       "resources/js/app.js",
-      "_SecondaryButton.50ff261f.js",
-      "_ApplicationLogo.48a7ae75.js",
+      "_SecondaryButton.45423d5f.js",
+      "_ApplicationLogo.f77b4c69.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_Dropdown.e3f68e29.js",
-      "_Container.18a5d235.js"
+      "_Dropdown.a53e1b92.js",
+      "_Container.d3840509.js"
     ]
+  },
+  "resources/js/Pages/Home/Home.css": {
+    "file": "assets/Home.b7f8de09.css",
+    "src": "resources/js/Pages/Home/Home.css"
   },
   "GedichtFragment.css": {
     "file": "assets/GedichtFragment.49834052.css",
     "src": "GedichtFragment.css"
   },
   "resources/js/app.css": {
-    "file": "assets/app.5ee91ce4.css",
+    "file": "assets/app.0b530c5b.css",
     "src": "resources/js/app.css"
   }
 }
