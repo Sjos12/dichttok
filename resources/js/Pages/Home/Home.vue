@@ -108,6 +108,7 @@ function getRandomSVGUrl() {
 
 
 <template>
+
     <div class="bg-gray-900 h-screen">
         <nav class="z-50 relative shadow-lg w-full bg-gray-800 py-3">
             <container class="flex justify-between">
@@ -158,22 +159,25 @@ function getRandomSVGUrl() {
             <div class="col-span-4 h-screen  relative">
 
 
-                <div class="relative h-screen mx-auto snap-start -top-3/4 z-0">
+                <div class="relative h-screen mx-auto z-0">
 
 
                     <!-- Overflow -->
                     <!--                    <MockGedicht class="snap-none"></MockGedicht>-->
                     <!-- Hero -->
-                    <MockGedicht class="snap-none" :gedicht="props.gedichten[0]"></MockGedicht>
+                    <div class="gedicht-height">
+                        Input illustration here.
+                    </div>
+<!--                    <MockGedicht class="snap-none" :gedicht="props.gedichten[0]"></MockGedicht>-->
                     <!-- Library -->
-                    <MockGedicht :gedicht="props.gedichten[1]"></MockGedicht>
-                    <MockGedicht :gedicht="props.gedichten[2]"></MockGedicht>
-                    <!-- Analysis -->
+                    <MockGedicht class="sticky top-0" :gedicht="props.gedichten[1]"></MockGedicht>
+<!--                    <MockGedicht :gedicht="props.gedichten[2]"></MockGedicht>-->
+<!--                    &lt;!&ndash; Analysis &ndash;&gt;-->
 
-                    <MockGedicht :is-highlighted="true" :gedicht="analysis_gedicht"></MockGedicht>
-                    <!-- Create your own (gedicht 3)  -->
-                    <MockGedicht :gedicht="mockGedicht"></MockGedicht>
-                    <MockGedicht :show-tags="true" :gedicht="props.gedichten[4]"></MockGedicht>
+<!--                    <MockGedicht :is-highlighted="true" :gedicht="analysis_gedicht"></MockGedicht>-->
+<!--                    &lt;!&ndash; Create your own (gedicht 3)  &ndash;&gt;-->
+<!--                    <MockGedicht :gedicht="mockGedicht"></MockGedicht>-->
+<!--                    <MockGedicht :show-tags="true" :gedicht="props.gedichten[4]"></MockGedicht>-->
                     <!--                    <MockGedicht></MockGedicht>-->
                     <!--                    <MockGedicht></MockGedicht>-->
                 </div>
@@ -191,7 +195,7 @@ function getRandomSVGUrl() {
             </div>
 
         </container>
-        <container class="h-full grid grid-cols-12">
+        <container class="h-full grid grid-cols-12 snap-start">
             <div class="col-span-6 my-auto gap-y-5 grid items-center">
                 <small>DichtNet is een</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Een verzameling van honderden gratis
@@ -218,7 +222,7 @@ function getRandomSVGUrl() {
                 </div>
             </div>
         </container>
-        <container class="gedicht-height grid grid-cols-12">
+        <container class="gedicht-height grid grid-cols-12 snap-start">
             <div class="col-span-6 my-auto gap-y-5 grid items-center">
                 <small>Met DichtNet</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Analyseer je gedichten..</h2>
@@ -230,7 +234,7 @@ function getRandomSVGUrl() {
 
             </div>
         </container>
-        <container class="gedicht-height grid grid-cols-12">
+        <container class="gedicht-height grid grid-cols-12 snap-start" >
             <div class="col-span-7 my-auto gap-y-5 grid items-center">
                 <small>Met DichtNet</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Deel je eigen gedichten met de wereld.</h2>
@@ -274,7 +278,7 @@ function getRandomSVGUrl() {
             </div>
         </container>
 
-        <container class="gedicht-height grid grid-cols-12">
+        <container class="gedicht-height grid grid-cols-12 snap-start">
             <div class="col-span-6 my-auto gap-y-5 grid items-center">
                 <small>DichtNet heeft</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Alle genre’s op een plek.</h2>
@@ -309,9 +313,9 @@ function getRandomSVGUrl() {
 
             </div>
         </container>
-        <container class="gedicht-height snap-start grid grid-cols-12">
-            <div class="col-start-2 col-end-11 my-auto py-20  bg-gray-800 shadow-xl rounded-md hover:drop-shadow-xl gap-y-5 grid items-center justify-center gap-5">
-
+        <container class="gedicht-height snap-start grid grid-cols-12 snap-start">
+            <div class="col-start-2 col-end-11 my-auto px-10 py-20  bg-gray-800 shadow-xl rounded-md hover:drop-shadow-xl gap-y-5 grid items-center justify-center gap-5">
+                <img src="/assets/gedicht_lady.jpg" class="w-full border-2 border-indigo-500 h-72 rounded-md shadow- object-cover object-top" alt="">
                 <h2 class="text-white font-medium text-4xl leading-tight text-center ">
                     Overtuigd?
                     Sluit je gratis aan!</h2>
