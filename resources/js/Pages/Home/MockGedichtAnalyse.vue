@@ -18,54 +18,7 @@ const stijlmiddelPickerPosition = reactive({
 const gedichtFragments = reactive([]);
 const gedichtref = ref(props.gedicht.gedicht);
 const highlightFragments = reactive(props.highlightFragments);
-splitUpGedicht();
-sortFragments();
-console.log(gedichtFragments);
-function splitUpGedicht() {
-    // Reset gedichtobject.
-    gedichtFragments.splice(0);
 
-    highlightFragments.forEach((fragment) => {
-        fragment.type = "highlight";
-        gedichtFragments.push(fragment);
-    });
-
-    // Indiced must be sorted... [{start: x, end: y}, {start: a, end: a}]
-
-    // uneditedIndices = [];
-
-    // unedited fragment
-    gedichtFragments.splice(0, 0, {
-        start: 0,
-        end: highlightFragments[0].start,
-        // value: startOfGedicht,
-        type: "unedited",
-    });
-
-    for (let i = 0; i < highlightFragments.length; i++) {
-        let indice = highlightFragments[i];
-        let nextIndice = highlightFragments[i + 1];
-        if (!indice || !nextIndice) continue;
-        gedichtFragments.splice(i, 0, {
-            start: indice.end,
-            end: nextIndice.start,
-        });
-    }
-
-    let lastIndice = highlightFragments[highlightFragments.length - 1];
-    gedichtFragments.splice(gedichtFragments.length - 1, 0, {
-        start: lastIndice.end,
-        end: gedichtref.value.length,
-        // value: endOfGedicht,
-        type: "unedited",
-    });
-}
-
-function sortFragments() {
-    gedichtFragments.sort((a, b) => {
-        return a.start - b.start;
-    });
-}
 function showInformationBox(event, fragment) {
     // var rect = event.target.getBoundingClientRect();
     var x = event.clientX; //x position within the element.

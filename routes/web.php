@@ -11,6 +11,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StijlmiddelController;
 use App\Models\Comment;
 use App\Models\Gedicht;
+use App\Models\Stijlmiddel;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -36,7 +37,8 @@ Route::get('/', function () {
         'genres' => Tag::all(),
         'gedichten_total' => Gedicht::count(),
         'user_total' => User::count(),
-        'analysis_gedicht' => Gedicht::withCount('likes', 'analyses')->orderByDesc('likes_count')->first()
+        'analysis_gedicht' => Gedicht::withCount('likes', 'analyses')->orderByDesc('likes_count')->first(),
+        'stijlmiddelen' => Stijlmiddel::all(),
     ]);
 });
 

@@ -10,7 +10,7 @@ import Container from "@/Layouts/Container.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import MockGedicht from "@/Pages/Home/MockGedicht.vue";
 import {reactive} from "@vue/reactivity";
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 const props = defineProps({
@@ -18,6 +18,7 @@ const props = defineProps({
     gedichten: Array,
     analysis_gedicht: Object,
     user_total: Number,
+    stijlmiddelen: Array,
     gedichten_total: Number,
 });
 
@@ -27,12 +28,21 @@ mockGedicht.gedicht = '';
 const displayTextArray = gedichtContent.split(' ');
 console.log(displayTextArray);
 const displayTextArrayIndex = ref(0);
-const textSpeed = ref(200);
+const textSpeed = ref(10);
 const newTextDelay = ref(200);
 const stopTyping = ref(false);
 let charIndex = 0;
 const typeStatus = ref(false);
 let doodleIndex = 0;
+
+// Observer
+let observer = null;
+const createSection = ref(null);
+const analyseSection = ref(null);
+const tagSection = ref(null);
+
+const showTags = ref(false);
+const showHighlights = ref(false);
 
 function register() {
     let url = route("register");
@@ -44,7 +54,50 @@ function login() {
     Inertia.get(url);
 }
 
-typeText();
+function registerIntersectionObserver() {
+    let options = {
+        treshold: 1,
+    }
+
+    // Create
+    observer = new IntersectionObserver((entries, observer) => intersectCreate( entries, observer), options);
+    observer.observe(createSection.value);
+
+    // Analyse
+    observer = new IntersectionObserver((entries, observer) => intersectAnalyse(entries, observer), options);
+    observer.observe(analyseSection.value);
+
+    // Tags
+    observer = new IntersectionObserver((entries,observer) => intersectTags(entries, observer), options);
+    observer.observe(tagSection.value);
+}
+function intersects(entries) {
+    if (entries[0].isIntersecting) return true;
+
+    return false;
+}
+function intersectTags(entries,observer) {
+    if(!intersects(entries)) return;
+    showTags.value = true;
+    showHighlights.value = true;
+    console.log('call tags');
+}
+function intersectAnalyse(entries,observer) {
+    if(!intersects(entries)) return;
+
+    showTags.value = false;
+    showHighlights.value = true;
+
+    console.log('call analyse', );
+}
+function intersectCreate(  entries,observer ) {
+    if(!intersects(entries)) return;
+    showTags.value = false;
+    showHighlights.value = false;
+    console.log('call create');
+}
+
+
 
 function typeText() {
     if (stopTyping.value) return;
@@ -105,6 +158,10 @@ function getRandomSVGUrl() {
     return basePath + url;
 }
 
+onMounted(() => {
+    typeText();
+    registerIntersectionObserver();
+});
 
 </script>
 
@@ -147,7 +204,7 @@ function getRandomSVGUrl() {
                     </SecondaryButton>
                 </div>
             </div>
-            <div class="col-span-1 h-screen grid">
+            <div class=" -z-10 col-span-1 h-screen grid">
                 <div class="mx-auto">
                     <img :style="{
                     marginTop: 14 + 'rem'
@@ -168,8 +225,8 @@ function getRandomSVGUrl() {
                     <!-- Overflow -->
                     <!--                    <MockGedicht class="snap-none"></MockGedicht>-->
                     <!-- Hero -->
-                    <div class="gedicht-height">
-                        Input illustration here.
+                    <div class="gedicht-height flex">
+                        <img src="/assets/hero.svg" class="m-auto w-full    " alt="Hero">
                     </div>
                     <!--                    <MockGedicht class="snap-none" :gedicht="props.gedichten[0]"></MockGedicht>-->
                     <!-- Library -->
@@ -198,7 +255,7 @@ function getRandomSVGUrl() {
             </div>
 
         </container>
-        <container class="h-full grid grid-cols-12 snap-start">
+        <container class="gedicht-height grid grid-cols-12 snap-start">
             <div class="col-span-6 my-auto gap-y-5 grid items-center">
                 <small>DichtNet is een</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Een verzameling van honderden gratis
@@ -226,33 +283,23 @@ function getRandomSVGUrl() {
 
                 </div>
             </div>
+            <div class="col-start-8 col-end-11 flex">
+                <img src="/assets/gallery.svg" class="my-auto w-full" alt="Library" srcset="">
+            </div>
         </container>
 
         <!-- Show gedicht element -->
         <div class="grid relative h-full">
             <div class="absolute w-full h-full">
                 <container class=" h-full mx-auto grid grid-cols-12 ">
-                    <MockGedicht class="sticky gedicht-height col-start-8 col-end-12 top-20"
-                                 :gedicht="props.gedichten[1]"></MockGedicht>
+                    <MockGedicht :tags="props.genres" :stijlmiddelen="stijlmiddelen" class=""
+                                 :gedicht="mockGedicht" :show-tags="showTags" :is-highlighted="showHighlights"></MockGedicht>
+
                 </container>
 
             </div>
-
-            <container class="gedicht-height grid grid-cols-12 ">
-                <div class="col-span-6 my-auto gap-y-5 grid items-center">
-                    <small>Met DichtNet</small>
-                    <h2 class="text-white font-medium text-5xl leading-tight ">Analyseer je gedichten..</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolore eligendi ipsum,
-                        laborum
-                        magnam sed sint! At autem cupiditate doloremque facere fugiat reiciendis! Ab dolore laboriosam
-                        maiores saepe suscipit voluptatibus?
-                    </p>
-
-                </div>
-            </container>
-            <container class="gedicht-height grid grid-cols-12 ">
-                <div class="col-span-7 my-auto gap-y-5 grid items-center">
+            <container  class="gedicht-height grid grid-cols-12 ">
+                <div ref="createSection" class="col-span-7 my-auto gap-y-5 grid items-center">
                     <small>Met DichtNet</small>
                     <h2 class="text-white font-medium text-5xl leading-tight ">Deel je eigen gedichten met de
                         wereld.</h2>
@@ -296,7 +343,21 @@ function getRandomSVGUrl() {
                 </div>
             </container>
             <container class="gedicht-height grid grid-cols-12 ">
-                <div class="col-span-6 my-auto gap-y-5 grid items-center">
+                <div  ref="analyseSection"  class="col-span-6 my-auto gap-y-5 grid items-center">
+                    <small>Met DichtNet</small>
+                    <h2 class="text-white font-medium text-5xl leading-tight ">Analyseer je gedichten..</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolore eligendi ipsum,
+                        laborum
+                        magnam sed sint! At autem cupiditate doloremque facere fugiat reiciendis! Ab dolore laboriosam
+                        maiores saepe suscipit voluptatibus?
+                    </p>
+
+                </div>
+            </container>
+
+            <container  class="gedicht-height grid grid-cols-12 ">
+                <div ref="tagSection" class="col-span-6 my-auto gap-y-5 grid items-center">
                     <small>DichtNet heeft</small>
                     <h2 class="text-white font-medium text-5xl leading-tight ">Alle genre’s op een plek.</h2>
                     <p>

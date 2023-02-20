@@ -5,6 +5,7 @@ import {computed} from "@vue/runtime-core";
 import {DateTime} from "luxon";
 import ViewGedichtAnalyse from "@/Pages/ViewGedichtAnalyse.vue";
 import {ref} from "vue";
+import {reactive} from "@vue/reactivity";
 
 const emit = defineEmits(['updateGedicht']);
 const props = defineProps({
@@ -17,13 +18,46 @@ const props = defineProps({
         author: '',
         analysis: Object,
     },
+    stijlmiddelen: Array,
     isHighlighted: false,
+    tags: Array,
     showTags: false,
 })
 const liked = ref(false);
 function toggleLike() {
     liked.value =  !liked.value
 }
+
+const randomTag = computed(() => {
+    return props.tags[Math.floor(Math.random()*props.tags.length)];
+});
+const highlights = computed(() => {
+    let gedicht = props.gedicht.gedicht;
+    let splittedArray = gedicht.split(' ');
+
+    let idxCount = 0;
+    let highlights = [];
+
+    splittedArray.forEach((word, idx) => {
+        console.log(word, word.length, idx);
+
+        if (idx % 2 === 0 ) {
+            highlights.push({
+                start: idxCount,
+                end: idxCount + word.length,
+                type: 'highlight',
+                stijlmiddel: props.stijlmiddelen[Math.floor(Math.random() * (props.stijlmiddelen.length))],
+            })
+        }
+        else  {
+            idxCount += word.length + 1;
+            return;
+        }
+        idxCount += word.length + 1;
+    });
+    console.log('foo', highlights);
+    return highlights;
+});
 let createdAt = computed(() => {
     return DateTime.fromISO(props.gedicht.created_at).toRelative();
 });
@@ -33,7 +67,8 @@ let createdAt = computed(() => {
     <div
         class="
         snap-start
-                gedicht-height
+        sticky gedicht-height col-start-8 col-end-12 top-14 bottom-20
+
                 drop-shadow-xl
                 shadow-xl
                 card
@@ -61,7 +96,7 @@ let createdAt = computed(() => {
                 </h1>
 
                 <p
-                    v-if="!isHighlighted || !props.gedicht.analyses.length"
+                    v-if="!isHighlighted"
                     class="
                             overflow-y-auto
                             whitespace-pre-wrap
@@ -75,7 +110,7 @@ let createdAt = computed(() => {
                     {{ props.gedicht.gedicht }}
                 </p>
 
-                <view-gedicht-analyse v-else :analysis="props.gedicht.analyses[0]" :gedicht="props.gedicht" ></view-gedicht-analyse>
+                <view-gedicht-analyse v-if="isHighlighted" :highlight-fragments="highlights" :gedicht="props.gedicht" ></view-gedicht-analyse>
                 <div class="flex justify-between">
                         <span class="mt-5 text-gray-300">
                             - {{ props.gedicht.auteur }}
@@ -95,9 +130,11 @@ let createdAt = computed(() => {
                                 ml-auto
                                 text-xs text-white
                             "
-
+                        :style="{
+                                backgroundColor: randomTag.color,
+                            }"
                     >
-                        Oorlog
+                        {{ randomTag.name }}
                     </div>
                 </div>
             </div>
