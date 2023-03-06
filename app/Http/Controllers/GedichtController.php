@@ -58,6 +58,7 @@ class GedichtController extends Controller
         $model->user_id = Auth::user()->id;
         $model->save();
         if (array_key_exists('voiceover', $validatedData)) {
+//            dd($validatedData['voiceover']);
             $model->addMedia($validatedData['voiceover'])->toMediaCollection(('audio'));
         }
 

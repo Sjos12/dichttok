@@ -33,6 +33,7 @@ const likedGedicht = computed(() => {
 const gedicht = ref(props.gedicht.gedicht);
 const shouldPlayAudio = ref(false);
 let audio = reactive(new Audio(props.gedicht.voiceover));
+console.log(props.gedicht.voiceover);
 audio.loop = true;
 
 onMounted(() => {

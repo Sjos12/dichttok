@@ -79,7 +79,7 @@ function intersects(entries) {
 function intersectTags(entries,observer) {
     if(!intersects(entries)) return;
     showTags.value = true;
-    showHighlights.value = true;
+    showHighlights.value = false;
     console.log('call tags');
 }
 function intersectAnalyse(entries,observer) {
@@ -92,6 +92,7 @@ function intersectAnalyse(entries,observer) {
 }
 function intersectCreate(  entries,observer ) {
     if(!intersects(entries)) return;
+    typeText();
     showTags.value = false;
     showHighlights.value = false;
     console.log('call create');
@@ -101,6 +102,7 @@ function intersectCreate(  entries,observer ) {
 
 function typeText() {
     if (stopTyping.value) return;
+    if (displayTextArrayIndex.value >= displayTextArray.length-1) return;
     if (displayTextArray[displayTextArrayIndex.value].length <= charIndex) {
         mockGedicht.gedicht += " ";
         displayTextArrayIndex.value += 1;
@@ -159,7 +161,7 @@ function getRandomSVGUrl() {
 }
 
 onMounted(() => {
-    typeText();
+
     registerIntersectionObserver();
 });
 
@@ -170,9 +172,21 @@ onMounted(() => {
 
     <div class="bg-gray-900 ">
         <nav class="z-50 relative shadow-lg w-full bg-gray-800 py-3">
-            <container class="flex justify-between">
+            <container class="flex justify-between ">
                 <ApplicationLogoVue class="text-white fill-white h-10"/>
-                <div class="flex gap-5">
+                <div class="flex w-full items-center color-gray-200 gap-5">
+                    <div class=" text-gray-400 gap-10 flex mx-auto">
+                        <a href="#share" >
+                            Platform
+                        </a>
+                        <a href="#find">
+                            Zoek
+                        </a>
+                        <a class="" href="#analyse">
+                            Analyseer
+                        </a>
+                    </div>
+
                     <PrimaryButtonVue @click="register"
                     >Registreer
                     </PrimaryButtonVue
@@ -186,15 +200,19 @@ onMounted(() => {
             </container>
         </nav>
 
-        <container class="h-screen grid grid-cols-12">
+        <container class="h-screen relative grid grid-cols-12 snap-start">
+            <div class="absolute left-1/2 -translate-x-1/2 bottom-36 animate-bounce duration-75 w-18">
+                <img src="/assets/arrow.svg" alt="Scroll!"  class="text-white rotate-180"  srcset="">
+            </div>
             <div class="col-span-6 my-auto gap-y-5 grid items-center pb-12">
                 <small>DichtNet is de</small>
                 <h1 class="text-white font-semibold text-6xl leading-tight ">De grootste gratis online dichtbundel.</h1>
                 <p>
-                    Het platform om nieuwe gedichten te vinden, je eigen gedichten te uploaden en ze te delen met je
+                        Het platform om nieuwe gedichten te vinden, je eigen gedichten te uploaden en ze te delen met je
                     vrienden.
                 </p>
                 <div class="flex gap-5 items-center">
+
                     <PrimaryButton @click="register" class="btn btn-primary  rounded-full px-6 py-2">
                         Registreer nu!
                     </PrimaryButton>
@@ -255,7 +273,7 @@ onMounted(() => {
             </div>
 
         </container>
-        <container class="gedicht-height grid grid-cols-12 snap-start">
+        <container class="gedicht-height grid grid-cols-12 snap-center">
             <div class="col-span-6 my-auto gap-y-5 grid items-center">
                 <small>DichtNet is een</small>
                 <h2 class="text-white font-medium text-5xl leading-tight ">Een verzameling van honderden gratis
@@ -298,7 +316,7 @@ onMounted(() => {
                 </container>
 
             </div>
-            <container  class="gedicht-height grid grid-cols-12 ">
+            <container id="share"  class="gedicht-height grid grid-cols-12 snap-center ">
                 <div ref="createSection" class="col-span-7 my-auto gap-y-5 grid items-center">
                     <small>Met DichtNet</small>
                     <h2 class="text-white font-medium text-5xl leading-tight ">Deel je eigen gedichten met de
@@ -342,7 +360,7 @@ onMounted(() => {
                     </div>
                 </div>
             </container>
-            <container class="gedicht-height grid grid-cols-12 ">
+            <container class="gedicht-height grid grid-cols-12 snap-center ">
                 <div  ref="analyseSection"  class="col-span-6 my-auto gap-y-5 grid items-center">
                     <small>Met DichtNet</small>
                     <h2 class="text-white font-medium text-5xl leading-tight ">Analyseer je gedichten..</h2>
@@ -356,7 +374,7 @@ onMounted(() => {
                 </div>
             </container>
 
-            <container  class="gedicht-height grid grid-cols-12 ">
+            <container  class="gedicht-height snap-center grid grid-cols-12 ">
                 <div ref="tagSection" class="col-span-6 my-auto gap-y-5 grid items-center">
                     <small>DichtNet heeft</small>
                     <h2 class="text-white font-medium text-5xl leading-tight ">Alle genre’s op een plek.</h2>
@@ -396,8 +414,8 @@ onMounted(() => {
         <container class="gedicht-height snap-start grid grid-cols-12 snap-start">
             <div
                 class="col-start-2 col-end-11 my-auto px-10 py-20  bg-gray-800 shadow-xl rounded-md hover:drop-shadow-xl gap-y-5 grid items-center justify-center gap-5">
-                <img src="/assets/gedicht_lady.jpg"
-                     class="w-full border-2 border-indigo-500 h-72 rounded-md shadow- object-cover object-top" alt="">
+<!--                <img src="/assets/gedicht_lady.jpg"-->
+<!--                     class="w-full border-2 border-indigo-500 h-72 rounded-md shadow- object-cover object-top" alt="">-->
                 <h2 class="text-white font-medium text-4xl leading-tight text-center ">
                     Overtuigd?
                     Sluit je gratis aan!</h2>

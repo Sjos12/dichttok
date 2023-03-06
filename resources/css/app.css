@@ -4,7 +4,7 @@
 
 @layer base {
    body {
-    @apply tracking-normal;
+    @apply tracking-normal scroll-smooth;
    }
     p {
         @apply break-words text-gray-300 leading-loose;

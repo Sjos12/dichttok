@@ -25,6 +25,7 @@ const gedichtForm = reactive({
     zelfGeschreven: false,
     auteur: "",
     context: "",
+    voiceover: null,
 });
 
 const activeStep = ref(1);
@@ -100,7 +101,7 @@ function prevStep() {
             />
             <GedichtRecordingVue
                 v-else-if="activeStep == 2"
-                v-model:recording="gedichtForm.recording"
+                v-model:voiceover="gedichtForm.voiceover"
                 @nextStep="nextStep"
                 @prevStep="prevStep"
             />
